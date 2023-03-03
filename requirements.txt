@@ -1,3 +1,4 @@
 fastapi==0.88.0
+requests==2.28.1
 tinydb==4.7.0
 uvicorn[standard]==0.20.0

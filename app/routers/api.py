@@ -8,7 +8,7 @@ This module provides routes for status.
 
 from .. import db
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Cookie, Response
 from pydantic import BaseModel
 
 
@@ -49,7 +49,7 @@ class UpdatedReminderList(BaseModel):
 # --------------------------------------------------------------------------------
 
 @router.get("/lists", summary="Get the user's reminder lists", response_model=list[ReminderList])
-def get_lists():
+async def get_lists() -> list[ReminderList]:
   """
   Gets the list of all reminder lists owned by the user.
   """
@@ -80,11 +80,22 @@ def get_lists():
 
 
 @router.post("/lists", summary="Create a new reminder list", response_model=ReminderList)
-def post_lists(reminder_list: NewReminderList):
+async def post_lists(reminder_list: NewReminderList) -> ReminderList:
   """
   Creates a new reminder list for the user.
   """
+
+  # new_list = reminder_list.dict()
+  # new_list["reminders"] = list()
+  # new_list["owner"] = 1
+
+  # table = db.table('reminder_lists')
+  # list_id = table.insert(new_list)
   
+  # # TODO: read this from the database
+  # new_list["id"] = list_id
+  # return new_list
+
   return ReminderList(
     id=1,
     owner=1,
@@ -98,7 +109,7 @@ def post_lists(reminder_list: NewReminderList):
 
 
 @router.get("/lists/{list_id}", summary="Get a reminder list by ID", response_model=ReminderList)
-def get_lists_id(list_id: int):
+async def get_lists_id(list_id: int) -> ReminderList:
   """
   Gets the reminder list by ID.
   """
@@ -116,7 +127,7 @@ def get_lists_id(list_id: int):
 
 
 @router.put("/lists/{list_id}", summary="Fully updates a reminder list", response_model=ReminderList)
-def put_lists_id(reminder_list: UpdatedReminderList):
+async def put_lists_id(reminder_list: UpdatedReminderList) -> ReminderList:
   """
   Fully updates a reminder list for the user.
   """
@@ -134,9 +145,27 @@ def put_lists_id(reminder_list: UpdatedReminderList):
 
 
 @router.delete("/lists/{list_id}", summary="Deletes a reminder list", response_model=dict)
-def delete_lists_id(list_id: int):
+async def delete_lists_id(list_id: int) -> dict:
   """
   Deletes the reminder list by ID.
   """
 
   return dict()
+
+
+
+
+class UserAccount(BaseModel):
+  username: str
+  password: str
+
+
+@router.post("/login", summary="Logs into the app")
+async def post_login(user: UserAccount, response: Response) -> dict():
+  response.set_cookie(key="session", value=user.username)
+  return {"message": f"Logged in as {user.username}"}
+
+
+@router.get("/items")
+async def read_items(session: str | None = Cookie(default=None)) -> dict:
+  return {"session": session}
