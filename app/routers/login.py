@@ -7,8 +7,9 @@ This module provides routes for authentication.
 # --------------------------------------------------------------------------------
 
 from .. import db, users
+from ..auth import get_http_basic_username, get_auth_cookie_username
 
-from fastapi import APIRouter, Cookie, Response
+from fastapi import APIRouter, Cookie, Depends, Response
 from pydantic import BaseModel
 
 
@@ -33,17 +34,17 @@ class UserAccount(BaseModel):
 # --------------------------------------------------------------------------------
 
 @router.post("/login", summary="Logs into the app")
-async def post_login(user: UserAccount, response: Response) -> dict():
-  response.set_cookie(key="session", value=user.username)
-  return {"message": f"Logged in as {user.username}"}
+async def post_login(response: Response, username: str = Depends(get_http_basic_username)) -> dict():
+  response.set_cookie(key="session", value=username)
+  return {"message": f"Logged in as {username}"}
 
 
 @router.post("/logout", summary="Logs out of the app")
-async def post_login(response: Response, session: str | None = Cookie(default=None)) -> dict():
-  response.set_cookie(key="session", value=session, expires=-1)
-  return {"message": f"Logged out as {session}"}
+async def post_login(response: Response, username: str = Depends(get_auth_cookie_username)) -> dict():
+  response.set_cookie(key="session", value=username, expires=-1)
+  return {"message": f"Logged out as {username}"}
 
 
-# @router.get("/items")
-# async def read_items(session: str | None = Cookie(default=None)) -> dict:
-#   return {"session": session}
+@router.get("/items")
+async def read_items(username: str = Depends(get_auth_cookie_username)) -> dict:
+  return {"session": username}
