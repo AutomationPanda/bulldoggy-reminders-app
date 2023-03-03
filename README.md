@@ -12,7 +12,6 @@ uvicorn main:app --reload
 
 ## Action plan
 
-* Implement cookie-based authentication for those users
 * Add authentication to API requests for lists
 * Add database implementation to API requests for lists
 

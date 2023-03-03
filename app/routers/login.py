@@ -6,7 +6,6 @@ This module provides routes for authentication.
 # Imports
 # --------------------------------------------------------------------------------
 
-from .. import db, users
 from ..auth import *
 
 from fastapi import APIRouter, Depends, Response
@@ -45,6 +44,6 @@ async def post_login(response: Response, user_token: UserToken = Depends(get_aut
   return {"message": f"Logged out as {user_token.username}"}
 
 
-@router.get("/items")
-async def read_items(user_token: str = Depends(get_auth_cookie_token)) -> dict:
-  return {auth_cookie: user_token.username}
+# @router.get("/items")
+# async def read_items(user_token: str = Depends(get_auth_cookie_token)) -> dict:
+#   return {auth_cookie: user_token.username}
