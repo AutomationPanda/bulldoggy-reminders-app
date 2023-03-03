@@ -18,7 +18,7 @@ uvicorn main:app --reload
 * list
   * owner
   * name
-* reminder
-  * list
-  * description
-  * completed
+  * reminders
+    * order
+    * description
+    * completed
