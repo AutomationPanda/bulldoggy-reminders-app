@@ -6,7 +6,7 @@ This module provides routes for authentication.
 # Imports
 # --------------------------------------------------------------------------------
 
-from .. import db
+from .. import db, users
 
 from fastapi import APIRouter, Cookie, Response
 from pydantic import BaseModel

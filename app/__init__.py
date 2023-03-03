@@ -6,7 +6,17 @@ This module builds shared parts for other modules.
 # Imports
 # --------------------------------------------------------------------------------
 
+import json
 import tinydb
+
+
+# --------------------------------------------------------------------------------
+# Read Configuration
+# --------------------------------------------------------------------------------
+
+with open('config.json') as config_json:
+  config = json.load(config_json)
+  users = config['users']
 
 
 # --------------------------------------------------------------------------------
