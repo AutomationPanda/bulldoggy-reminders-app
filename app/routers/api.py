@@ -22,7 +22,6 @@ router = APIRouter(prefix="/api")
 # --------------------------------------------------------------------------------
 
 class ReminderItem(BaseModel):
-  order: int
   description: str
   completed: bool
 
@@ -50,9 +49,9 @@ def get_status():
       owner=1,
       name="Groceries",
       reminders=[
-        ReminderItem(order=1, description="Apple juice", completed=False),
-        ReminderItem(order=2, description="Ribs", completed=False),
-        ReminderItem(order=3, description="Cheese", completed=True),
+        ReminderItem(description="Apple juice", completed=False),
+        ReminderItem(description="Ribs", completed=False),
+        ReminderItem(description="Cheese", completed=True),
       ]
     ),
     ReminderList(
@@ -60,10 +59,10 @@ def get_status():
       owner=1,
       name="Chores",
       reminders=[
-        ReminderItem(order=1, description="Mow the lawn", completed=False),
-        ReminderItem(order=2, description="Feed the dog", completed=True),
-        ReminderItem(order=3, description="Do laundry", completed=False),
-        ReminderItem(order=4, description="Vacuum", completed=False),
+        ReminderItem(description="Mow the lawn", completed=False),
+        ReminderItem(description="Feed the dog", completed=True),
+        ReminderItem(description="Do laundry", completed=False),
+        ReminderItem(description="Vacuum", completed=False),
       ]
     ),
   ]
