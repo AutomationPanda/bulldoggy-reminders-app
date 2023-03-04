@@ -42,8 +42,3 @@ async def post_login(response: Response, user_token: UserToken = Depends(get_htt
 async def post_login(response: Response, user_token: UserToken = Depends(get_auth_cookie_token)) -> dict():
   response.set_cookie(key=auth_cookie, value=user_token.token, expires=-1)
   return {"message": f"Logged out as {user_token.username}"}
-
-
-# @router.get("/items")
-# async def read_items(user_token: str = Depends(get_auth_cookie_token)) -> dict:
-#   return {auth_cookie: user_token.username}
