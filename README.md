@@ -10,12 +10,6 @@ uvicorn main:app --reload
 ```
 
 
-## Action plan
-
-* Add authentication to API requests for lists
-* Add database implementation to API requests for lists
-
-
 ## Data models
 
 * user
