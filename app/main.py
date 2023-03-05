@@ -7,6 +7,7 @@ This module is the main module for the FastAPI app.
 # --------------------------------------------------------------------------------
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.routers import api, login, reminders
@@ -36,3 +37,8 @@ app.mount( "/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 def read_root():
   return {"Hello": "World"}
+
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse("static/img/favicon.ico")
