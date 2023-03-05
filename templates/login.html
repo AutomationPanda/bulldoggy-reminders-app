@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Login | Reminders app</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/font-faces.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+    <div class="login-page">
+        {% if invalid %}
+        <p>INVALID LOGIN! PLEASE RETRY!</p>
+        {% endif %}
+        <div class="form">
+            <div class="login-form-top">
+                <h1 class="login-form-top-title">Bulldoggy</h1>
+                <p class="login-form-top-subtitle">The reminders app</p>
+                <img src="/static/img/bulldoggy-100px.png" />
+            </div>
+            <form action="/login" method="post" class="login-form">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Enter username" name="username" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter password" name="password" required>
+                </div>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

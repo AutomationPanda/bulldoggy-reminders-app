@@ -1,0 +1,89 @@
+body {
+  background-color: #D0905D;
+  font-family: PlayfairDisplay;
+}
+
+.login-page {
+  width: 360px;
+  padding: 5% 0 0;
+  margin: auto;
+}
+
+.login-form-top {
+  margin-bottom: 20%;
+}
+
+.login-form-top-title {
+  font-size: 2.5em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+.login-form-top-subtitle {
+  font-style: italic;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form label {
+  font-family: PlayfairDisplay;
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 10px;
+  display:inline-block;
+}
+
+.form input {
+  font-family: PlayfairDisplay;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin-bottom: 15px;
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+.form button {
+  font-family: PlayfairDisplay;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 12px;
+  color: #ffffff;
+  font-size: 1.1em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+
+.message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.message a:hover {
+  text-decoration: underline;
+}

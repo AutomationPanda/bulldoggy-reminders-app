@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "PlayfairDisplay";
+  src: url("/static/font/PlayfairDisplay-VariableFont_wght.ttf");
+  font-weight: 125 950;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PlayfairDisplay";
+  src: url("/static/font/PlayfairDisplay-Italic-VariableFont_wght.ttf");
+  font-weight: 125 950;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}

@@ -39,4 +39,4 @@ db = tinydb.TinyDB('reminder_db.json')
 # Templates
 # --------------------------------------------------------------------------------
 
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")

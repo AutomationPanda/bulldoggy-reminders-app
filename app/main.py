@@ -7,6 +7,7 @@ This module is the main module for the FastAPI app.
 # --------------------------------------------------------------------------------
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from app.routers import api, login, reminders
 
@@ -19,6 +20,13 @@ app = FastAPI()
 app.include_router(api.router)
 app.include_router(login.router)
 app.include_router(reminders.router)
+
+
+# --------------------------------------------------------------------------------
+# Static Files
+# --------------------------------------------------------------------------------
+
+app.mount( "/static", StaticFiles(directory="static"), name="static")
 
 
 # --------------------------------------------------------------------------------
