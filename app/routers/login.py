@@ -26,8 +26,13 @@ router = APIRouter()
 # --------------------------------------------------------------------------------
 
 @router.get("/login", summary="Gets the login page", response_class=HTMLResponse)
-async def get_login(request: Request, invalid: Optional[bool] = None):
-  return templates.TemplateResponse("login.html", {'request': request, 'invalid': invalid})
+async def get_login(
+  request: Request,
+  invalid: Optional[bool] = None,
+  unauthorized: Optional[bool] = None):
+
+  context = {'request': request, 'invalid': invalid, 'unauthorized': unauthorized}
+  return templates.TemplateResponse("login.html", context)
 
 
 @router.post("/login", summary="Logs into the app")

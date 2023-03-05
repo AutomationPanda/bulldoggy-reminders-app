@@ -10,7 +10,8 @@ from app import templates
 from app.utils.auth import AuthCookie, get_auth_cookie
 
 from fastapi import APIRouter, Depends, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
+from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -25,5 +26,8 @@ router = APIRouter()
 # --------------------------------------------------------------------------------
 
 @router.get("/reminders", summary="Logs into the app", response_class=HTMLResponse)
-async def get_reminders(request: Request, cookie: AuthCookie = Depends(get_auth_cookie)):
-  return templates.TemplateResponse("reminders.html", {'request': request})
+async def get_reminders(request: Request, cookie: Optional[AuthCookie] = Depends(get_auth_cookie)):
+  if cookie:
+    return templates.TemplateResponse("reminders.html", {'request': request})
+  else:
+    return RedirectResponse('/login?unauthorized=True', status_code=302)
