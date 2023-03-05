@@ -10,7 +10,7 @@ from app import templates
 from app.utils.auth import AuthCookie, get_login_form_creds, get_auth_cookie
 
 from fastapi import APIRouter, Depends, Request, Response
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 
 # --------------------------------------------------------------------------------
@@ -30,9 +30,10 @@ async def get_login(request: Request):
 
 
 @router.post("/login", summary="Logs into the app")
-async def post_login(response: Response, cookie: AuthCookie = Depends(get_login_form_creds)) -> dict:
+async def post_login(cookie: AuthCookie = Depends(get_login_form_creds)) -> dict:
+  response = RedirectResponse('/reminders', status_code=302)
   response.set_cookie(key=cookie.name, value=cookie.token)
-  return {"message": f"Logged in as {cookie.username}"}
+  return response
 
 
 @router.post("/logout", summary="Logs out of the app")

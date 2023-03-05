@@ -1,30 +1,29 @@
 """
-This module is the main module for the FastAPI app.
+This module provides routes for the reminders pages.
 """
 
 # --------------------------------------------------------------------------------
 # Imports
 # --------------------------------------------------------------------------------
 
-from fastapi import FastAPI
+from app import templates
+from app.utils.auth import AuthCookie, get_auth_cookie
 
-from app.routers import api, login, reminders
+from fastapi import APIRouter, Depends, Request
+from fastapi.responses import HTMLResponse
 
 
 # --------------------------------------------------------------------------------
-# App Creation
+# Router
 # --------------------------------------------------------------------------------
 
-app = FastAPI()
-app.include_router(api.router)
-app.include_router(login.router)
-app.include_router(reminders.router)
+router = APIRouter()
 
 
 # --------------------------------------------------------------------------------
 # Routes
 # --------------------------------------------------------------------------------
 
-@app.get("/")
-def read_root():
-  return {"Hello": "World"}
+@router.get("/reminders", summary="Logs into the app", response_class=HTMLResponse)
+async def get_reminders(request: Request, cookie: AuthCookie = Depends(get_auth_cookie)):
+  return templates.TemplateResponse("reminders.html", {'request': request})
