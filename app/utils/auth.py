@@ -9,8 +9,8 @@ This module provides security and authentication.
 import jwt
 import secrets
 
-from . import users, secret_key
-from .exceptions import UnauthorizedException
+from app import users, secret_key
+from app.utils.exceptions import UnauthorizedException
 
 from fastapi import Cookie, Form
 from fastapi.security import HTTPBasic

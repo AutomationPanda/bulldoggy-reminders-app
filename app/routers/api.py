@@ -6,9 +6,9 @@ This module provides routes for the API.
 # Imports
 # --------------------------------------------------------------------------------
 
-from .. import db
-from ..auth import AuthCookie, get_auth_cookie
-from ..exceptions import NotFoundException, ForbiddenException
+from app import db
+from app.utils.auth import AuthCookie, get_auth_cookie
+from app.utils.exceptions import NotFoundException, ForbiddenException
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel

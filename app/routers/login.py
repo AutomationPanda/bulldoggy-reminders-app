@@ -6,11 +6,11 @@ This module provides routes for authentication.
 # Imports
 # --------------------------------------------------------------------------------
 
-from ..auth import AuthCookie, get_login_form_creds, get_auth_cookie
+from app import templates
+from app.utils.auth import AuthCookie, get_login_form_creds, get_auth_cookie
 
 from fastapi import APIRouter, Depends, Request, Response
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 
 
 # --------------------------------------------------------------------------------
@@ -18,13 +18,6 @@ from fastapi.templating import Jinja2Templates
 # --------------------------------------------------------------------------------
 
 router = APIRouter()
-
-
-# --------------------------------------------------------------------------------
-# Templates
-# --------------------------------------------------------------------------------
-
-templates = Jinja2Templates(directory="templates")
 
 
 # --------------------------------------------------------------------------------

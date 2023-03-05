@@ -9,6 +9,8 @@ This module builds shared parts for other modules.
 import json
 import tinydb
 
+from fastapi.templating import Jinja2Templates
+
 
 # --------------------------------------------------------------------------------
 # Read Configuration
@@ -31,3 +33,10 @@ secret_key = config['secret_key']
 # --------------------------------------------------------------------------------
 
 db = tinydb.TinyDB('reminder_db.json')
+
+
+# --------------------------------------------------------------------------------
+# Templates
+# --------------------------------------------------------------------------------
+
+templates = Jinja2Templates(directory="app/templates")
