@@ -8,3 +8,11 @@ A web app for reminders built using FastAPI and HTMX
 ```
 uvicorn main:app --reload
 ```
+
+
+## TODO
+
+* Failed login redirect
+* Reminders page
+* Styling
+* HTMX
