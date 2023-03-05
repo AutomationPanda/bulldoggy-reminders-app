@@ -6,9 +6,6 @@
 </head>
 <body>
     <div class="login-page">
-        {% if invalid %}
-        <p>INVALID LOGIN! PLEASE RETRY!</p>
-        {% endif %}
         <div class="form">
             <div class="login-form-top">
                 <h1 class="login-form-top-title">Bulldoggy</h1>
@@ -27,6 +24,11 @@
                 <div>
                     <button type="submit">Login</button>
                 </div>
+                {% if invalid %}
+                <div class="invalid-login-warning">
+                    <p>Invalid login! Please retry.</p>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>
