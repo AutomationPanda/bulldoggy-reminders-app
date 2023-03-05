@@ -59,10 +59,11 @@ body {
   font-family: PlayfairDisplay;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #222222;
   width: 100%;
   border: 0;
   padding: 12px;
+  margin-top: 5px;
   color: #ffffff;
   font-size: 1.1em;
   cursor: pointer;
