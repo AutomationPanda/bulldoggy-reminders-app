@@ -4,6 +4,9 @@
 </head>
 <body>
     <h1>LOGIN HERE</h1>
+    {% if invalid %}
+    <p>INVALID LOGIN! PLEASE RETRY!</p>
+    {% endif %}
     <form action="/login" method="post">
         <div>
             <label for="username"><b>Username</b></label>

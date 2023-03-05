@@ -64,7 +64,7 @@ def get_login_form_creds(username: str = Form(), password: str = Form()) -> Auth
         username=username,
         token=token)
 
-  raise UnauthorizedException()
+  return None
 
 
 def get_auth_cookie(reminders_session: str | None = Cookie(default=None)) -> AuthCookie:
