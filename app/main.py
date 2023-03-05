@@ -8,7 +8,7 @@ This module is the main module for the FastAPI app.
 
 from fastapi import FastAPI
 
-from .routers import api, login
+from .routers import api, login, pages
 
 
 # --------------------------------------------------------------------------------
@@ -18,6 +18,7 @@ from .routers import api, login
 app = FastAPI()
 app.include_router(api.router)
 app.include_router(login.router)
+app.include_router(pages.router)
 
 
 # --------------------------------------------------------------------------------
