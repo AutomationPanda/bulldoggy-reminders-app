@@ -6,12 +6,9 @@ This module provides routes for web pages.
 # Imports
 # --------------------------------------------------------------------------------
 
-from ..auth import *
-
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-# from pydantic import BaseModel
 
 
 # --------------------------------------------------------------------------------

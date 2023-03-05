@@ -4,5 +4,18 @@
 </head>
 <body>
     <h1>LOGIN HERE</h1>
+    <form action="/auth/login" method="post">
+        <div>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+        </div>
+        <div>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
 </body>
 </html>

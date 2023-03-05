@@ -11,8 +11,9 @@ import secrets
 
 from . import users, secret_key
 from .exceptions import UnauthorizedException
-from fastapi import Cookie, Depends
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
+
+from fastapi import Cookie, Form
+from fastapi.security import HTTPBasic
 from pydantic import BaseModel
 
 
@@ -20,17 +21,18 @@ from pydantic import BaseModel
 # Globals
 # --------------------------------------------------------------------------------
 
-auth_cookie = "reminders_session"
 basic_auth = HTTPBasic(auto_error=False)
+auth_cookie_name = "reminders_session"
 
 
 # --------------------------------------------------------------------------------
 # Models
 # --------------------------------------------------------------------------------
 
-class UserToken(BaseModel):
-  username: str
+class AuthCookie(BaseModel):
+  name: str
   token: str
+  username: str
 
 
 # --------------------------------------------------------------------------------
@@ -53,19 +55,25 @@ def deserialize_token(token: str) -> str:
 # Authentication Checkers
 # --------------------------------------------------------------------------------
 
-def get_http_basic_token(basic: HTTPBasicCredentials = Depends(basic_auth)) -> UserToken:
-  if basic.username in users:
-    if secrets.compare_digest(basic.password, users[basic.username]):
-      token = serialize_token(basic.username)
-      return UserToken(username=basic.username, token=token)
+def get_login_form_creds(username: str = Form(), password: str = Form()) -> AuthCookie:
+  if username in users:
+    if secrets.compare_digest(password, users[username]):
+      token = serialize_token(username)
+      return AuthCookie(
+        name=auth_cookie_name,
+        username=username,
+        token=token)
 
   raise UnauthorizedException()
 
 
-def get_auth_cookie_token(reminders_session: str | None = Cookie(default=None)) -> str:
+def get_auth_cookie(reminders_session: str | None = Cookie(default=None)) -> AuthCookie:
   if reminders_session:
     username = deserialize_token(reminders_session)
     if username and username in users:
-      return UserToken(username=username, token=reminders_session)
+      return AuthCookie(
+        name=auth_cookie_name,
+        username=username,
+        token=reminders_session)
 
   raise UnauthorizedException()
