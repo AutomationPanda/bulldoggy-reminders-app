@@ -12,9 +12,10 @@ import secrets
 from app import users, secret_key
 from app.utils.exceptions import UnauthorizedException
 
-from fastapi import Cookie, Form
+from fastapi import Cookie, Depends, Form
 from fastapi.security import HTTPBasic
 from pydantic import BaseModel
+from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -55,25 +56,36 @@ def deserialize_token(token: str) -> str:
 # Authentication Checkers
 # --------------------------------------------------------------------------------
 
-def get_login_form_creds(username: str = Form(), password: str = Form()) -> AuthCookie:
+def get_login_form_creds(username: str = Form(), password: str = Form()) -> Optional[AuthCookie]:
+  cookie = None
+
   if username in users:
     if secrets.compare_digest(password, users[username]):
       token = serialize_token(username)
-      return AuthCookie(
+      cookie = AuthCookie(
         name=auth_cookie_name,
         username=username,
         token=token)
 
-  return None
+  return cookie
 
 
-def get_auth_cookie(reminders_session: str | None = Cookie(default=None)) -> AuthCookie:
+def get_auth_cookie(reminders_session: Optional[str] = Cookie(default=None)) -> Optional[AuthCookie]:
+  cookie = None
+
   if reminders_session:
     username = deserialize_token(reminders_session)
     if username and username in users:
-      return AuthCookie(
+      cookie = AuthCookie(
         name=auth_cookie_name,
         username=username,
         token=reminders_session)
+  
+  return cookie
 
-  raise UnauthorizedException()
+
+def get_auth_cookie_username(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)) -> str:
+  if not cookie:
+    raise UnauthorizedException()
+  
+  return cookie.username
