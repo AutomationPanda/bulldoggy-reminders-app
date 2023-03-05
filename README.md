@@ -12,7 +12,8 @@ uvicorn main:app --reload
 
 ## TODO
 
-* Failed login redirect
+* Failed login
+* Logout
 * Reminders page
 * Styling
 * HTMX
