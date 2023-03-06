@@ -1,31 +1,35 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: PlayfairDisplay;
 }
 
 .title-bar {
-  background-color: #333;
+  background-color: #222222;
   color: #fff;
-  height: 50px;
+  height: 75px;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 30px;
 }
 
 .title-bar h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: normal;
+  margin: 0px 40px 0px 20px;
+  /* text-align: center; */
+}
+
+.title-bar p {
   flex-grow: 1;
-  text-align: center;
+  font-style: italic;
+  margin-bottom: 0px;
 }
 
 .sidebar {
-  background-color: #eee;
-  width: 20%;
+  background-color: #D0905D;
+  width: 25%;
   height: 100%;
   position: fixed;
-  top: 50px;
+  top: 75px;
   left: 0;
   overflow: auto;
 }
@@ -35,6 +39,24 @@ body {
 }
 
 .content {
-  margin-left: 20%;
+  margin-left: 25%;
   padding: 20px;
+}
+
+button {
+  font-family: PlayfairDisplay;
+  text-transform: uppercase;
+  outline: 0;
+  background: #222222;
+  border: 0;
+  padding: 12px;
+  margin-top: 5px;
+  color: #ffffff;
+  font-size: 1.1em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover,button:active,button:focus {
+  background: #664444;
 }
