@@ -1,62 +1,58 @@
 body {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: PlayfairDisplay;
 }
 
-.title-bar {
+.reminders-grid {
+  display: grid;
+  grid-template-columns: 25% 75% auto;
+  grid-template-rows: 80px calc(100vh - 80px) auto;
+  gap: 0px;
+}
+
+.reminders-grid-title {
+  grid-column: 1 / 3;
+  grid-row: 1;
   background-color: white;
   color: black;
-  height: 80px;
+  border-bottom: 1px solid #222222;
+}
+
+.title-container {
   display: flex;
   align-items: center;
   padding: 0 30px;
+  height: 100%;
 }
 
-.title-bar h1 {
+.title-container h1 {
   margin: 0px 30px 0px 20px;
   /* text-align: center; */
 }
 
-.title-bar p {
+.title-container p {
   flex-grow: 1;
   font-style: italic;
   margin-bottom: 0px;
 }
 
-.title-bar form {
+.title-container form {
   margin: 0;
 }
 
-.sidebar {
+.reminders-grid-lists {
+  grid-column: 1;
+  grid-row: 2;
   background-color: #D0905D;
-  border: 1px solid #222222;
-  width: 25%;
-  position: absolute;
-  top: 80px;
-  left: 0;
-  bottom: 0;
-  overflow: auto;
+  padding: 10px;
 }
 
-.inner-sidebar {
-  padding: 20px;
-}
-
-.content {
-  background-color: #D0905D;
-  border: 1px solid #222222;
-  border: 1px solid #222222;
-  position: absolute;
-  top: 80px;
-  left: 25%;
-  bottom: 0;
-  right: 0;
-  overflow: auto;
-}
-
-.inner-content {
-  padding: 20px;
+.reminders-grid-items {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 10px;
 }
 
 button {
@@ -67,7 +63,7 @@ button {
   border: 0;
   padding: 12px;
   color: #ffffff;
-  font-size: 1.1em;
+  font-size: 1em;
   cursor: pointer;
   border-radius: 4px;
 }

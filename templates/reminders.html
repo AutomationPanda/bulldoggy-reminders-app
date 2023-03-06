@@ -2,30 +2,25 @@
 <head>
     <title>Reminders | Bulldoggy reminders app</title>
     <link rel="stylesheet" type="text/css" href="/static/css/font-faces.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reminders.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reminders2.css">
 </head>
 <body>
-	<div class="title-bar">
-        <img src="/static/img/bulldoggy-100px.png" height="60px"/>
-        <h1>Bulldoggy</h1>
-        <p>Reminders for {{username}}</p>
-        <form action="/logout" method="post">
-            <button type="submit">Logout</button>
-        </form>
-    </div>
-	<div class="sidebar">
-        <div class="inner-sidebar">
-            <h2>Lists</h2>
-            <ul>
-                <li>Chores</li>
-                <li>Groceries</li>
-                <li>Projects</li>
-            </ul>
+    <div class="reminders-grid">
+        <div class="reminders-grid-title">
+            <div class="title-container">
+                <img src="/static/img/bulldoggy-100px.png" height="60px"/>
+                <h1>Bulldoggy</h1>
+                <p>Reminders for {{username}}</p>
+                <form action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
         </div>
-	</div>
-	<div class="content">
-        <div class="inner-content">
-            <p>Reminders go here.</p>
+        <div class="reminders-grid-lists">
+            LISTS
+        </div>
+        <div class="reminders-grid-items">
+            REMINDERS
         </div>
     </div>
 </body>
