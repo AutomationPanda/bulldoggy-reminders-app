@@ -5,21 +5,16 @@ body {
 }
 
 .title-bar {
-  background-color: #222222;
-  color: #fff;
-  height: 75px;
+  background-color: white;
+  color: black;
+  height: 80px;
   display: flex;
   align-items: center;
   padding: 0 30px;
 }
 
-.title-bar img {
-  background-color: white;
-  border-radius: 4px;
-}
-
 .title-bar h1 {
-  margin: 0px 40px 0px 20px;
+  margin: 0px 30px 0px 20px;
   /* text-align: center; */
 }
 
@@ -29,14 +24,20 @@ body {
   margin-bottom: 0px;
 }
 
+.title-bar form {
+  margin: 0;
+}
+
 .sidebar {
   background-color: #D0905D;
   width: 25%;
   height: 100%;
   position: fixed;
-  top: 75px;
+  top: 80px;
   left: 0;
   overflow: auto;
+  border-top: 1px solid #222222;
+  border-right: 1px solid #222222;
 }
 
 .inner-sidebar {
@@ -46,6 +47,7 @@ body {
 .content {
   margin-left: 25%;
   padding: 20px;
+  border-top: 1px solid #222222;
 }
 
 button {
@@ -55,7 +57,6 @@ button {
   background: #222222;
   border: 0;
   padding: 12px;
-  margin-top: 5px;
   color: #ffffff;
   font-size: 1.1em;
   cursor: pointer;

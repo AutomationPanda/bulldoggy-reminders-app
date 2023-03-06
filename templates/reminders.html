@@ -9,7 +9,9 @@
         <img src="/static/img/bulldoggy-100px.png" height="60px"/>
         <h1>Bulldoggy</h1>
         <p>The reminders app</p>
-        <button type="submit">Logout</button>
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
     </div>
 	<div class="sidebar">
         <div class="inner-sidebar">
@@ -23,12 +25,6 @@
 	</div>
 	<div class="content">
 		<p>Reminders go here.</p>
-
-        <form action="/logout" method="post">
-            <div>
-                <button type="submit">Logout</button>
-            </div>
-        </form>
     </div>
 </body>
 </html>
