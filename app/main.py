@@ -6,10 +6,11 @@ This module is the main module for the FastAPI app.
 # Imports
 # --------------------------------------------------------------------------------
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
+from app.utils.exceptions import UnauthorizedPageException
 from app.routers import api, login, reminders
 
 
@@ -28,6 +29,15 @@ app.include_router(reminders.router)
 # --------------------------------------------------------------------------------
 
 app.mount( "/static", StaticFiles(directory="static"), name="static")
+
+
+# --------------------------------------------------------------------------------
+# Exception Handlers
+# --------------------------------------------------------------------------------
+
+@app.exception_handler(UnauthorizedPageException)
+async def unauthorized_exception_handler(request: Request, exc: UnauthorizedPageException):
+  return RedirectResponse('/login?unauthorized=True', status_code=302)
 
 
 # --------------------------------------------------------------------------------

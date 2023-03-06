@@ -8,8 +8,9 @@ This module provides routes for authentication.
 
 from app import templates
 from app.utils.auth import AuthCookie, get_login_form_creds, get_auth_cookie
+from app.utils.exceptions import UnauthorizedPageException
 
-from fastapi import APIRouter, Depends, Request, Response
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from typing import Optional
 
@@ -29,9 +30,10 @@ router = APIRouter()
 async def get_login(
   request: Request,
   invalid: Optional[bool] = None,
+  logged_out: Optional[bool] = None,
   unauthorized: Optional[bool] = None):
 
-  context = {'request': request, 'invalid': invalid, 'unauthorized': unauthorized}
+  context = {'request': request, 'invalid': invalid, 'logged_out': logged_out, 'unauthorized': unauthorized}
   return templates.TemplateResponse("login.html", context)
 
 
@@ -42,10 +44,16 @@ async def post_login(cookie: Optional[AuthCookie] = Depends(get_login_form_creds
     response.set_cookie(key=cookie.name, value=cookie.token)
   else:
     response = RedirectResponse('/login?invalid=True', status_code=302)
+  
   return response
 
 
+@router.get("/logout", summary="Logs out of the app")
 @router.post("/logout", summary="Logs out of the app")
-async def post_login(response: Response, cookie: AuthCookie = Depends(get_auth_cookie)) -> dict:
+async def post_login(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)) -> dict:
+  if not cookie:
+    raise UnauthorizedPageException()
+  
+  response = RedirectResponse('/login?logged_out=True', status_code=302)
   response.set_cookie(key=cookie.name, value=cookie.token, expires=-1)
-  return {"message": f"Logged out as {cookie.username}"}
+  return response

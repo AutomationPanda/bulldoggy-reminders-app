@@ -18,6 +18,11 @@ class UnauthorizedException(HTTPException):
     super().__init__(status.HTTP_401_UNAUTHORIZED, "Unauthorized")
 
 
+class UnauthorizedPageException(HTTPException):
+  def __init__(self):
+    super().__init__(status.HTTP_401_UNAUTHORIZED, "Unauthorized")
+
+
 class ForbiddenException(HTTPException):
   def __init__(self):
     super().__init__(status.HTTP_403_FORBIDDEN, "Forbidden")

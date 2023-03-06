@@ -28,6 +28,10 @@
                 <div class="invalid-login-warning">
                     <p>Invalid login! Please retry.</p>
                 </div>
+                {% elif logged_out %}
+                <div class="invalid-login-warning">
+                    <p>Successfully logged out.</p>
+                </div>
                 {% elif unauthorized %}
                 <div class="invalid-login-warning">
                     <p>Please login first.</p>
