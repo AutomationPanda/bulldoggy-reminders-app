@@ -31,7 +31,8 @@ body {
 .title-container-left {
   display: flex;
   align-items: center;
-  padding: 0 30px;
+  text-align: center;
+  justify-content: center;
   height: 100%;
 }
 
@@ -40,7 +41,7 @@ body {
 }
 
 #bulldoggy-title {
-  margin: 0px 20px 0px 20px;
+  margin: 0 0 0 10px;
 }
 
 .title-container-right {
@@ -53,6 +54,8 @@ body {
 #reminders-message {
   flex-grow: 1;
   font-style: italic;
+  font-size: 1.2em;
+  margin-top: 12px;
   margin-bottom: 0px;
 }
 
@@ -81,9 +84,9 @@ button {
   outline: 0;
   background: #222222;
   border: 0;
-  padding: 12px;
+  padding: 10px;
   color: #ffffff;
-  font-size: 1em;
+  font-size: 0.9em;
   cursor: pointer;
   border-radius: 4px;
 }
