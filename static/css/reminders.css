@@ -30,13 +30,12 @@ body {
 
 .sidebar {
   background-color: #D0905D;
-  border-top: 1px solid #222222;
-  border-right: 1px solid #222222;
+  border: 1px solid #222222;
   width: 25%;
-  height: 100%;
-  position: fixed;
+  position: absolute;
   top: 80px;
   left: 0;
+  bottom: 0;
   overflow: auto;
 }
 
@@ -46,8 +45,17 @@ body {
 
 .content {
   background-color: #D0905D;
-  border-top: 1px solid #222222;
-  margin-left: 25%;
+  border: 1px solid #222222;
+  border: 1px solid #222222;
+  position: absolute;
+  top: 80px;
+  left: 25%;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.inner-content {
   padding: 20px;
 }
 
