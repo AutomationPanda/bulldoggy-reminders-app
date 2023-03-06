@@ -12,7 +12,8 @@ uvicorn main:app --reload
 
 ## TODO
 
-* Keep position of title bar fixed!
+* Try using CSS grid layout for reminders page
+  * https://stackoverflow.com/questions/43747185/force-css-grid-container-to-fill-full-screen-of-device
 * Reminders page structure
 * Reminders page style
 * HTMX interactions
