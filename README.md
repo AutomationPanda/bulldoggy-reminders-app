@@ -12,8 +12,8 @@ uvicorn main:app --reload
 
 ## TODO
 
-* Failed login
-* Logout
-* Reminders page
-* Styling
-* HTMX
+* Reminders page structure
+* Reminders page style
+* HTMX interactions
+* UI tests
+* API tests (?)
