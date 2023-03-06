@@ -1,11 +1,26 @@
 <html>
 <head>
     <title>Reminders | Reminders app</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/font-faces.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/reminders.css">
 </head>
 <body>
-    <h1>Reminders</h1>
-    <p>Whut do I do?</p>
-    <div>
+	<div class="title-bar">
+        <h1>Bulldoggy Reminders</h1>
+    </div>
+	<div class="sidebar">
+        <div class="inner-sidebar">
+            <h2>Lists</h2>
+            <ul>
+                <li><a href="#">Chores</a></li>
+                <li><a href="#">Groceries</a></li>
+                <li><a href="#">Projects</a></li>
+            </ul>
+        </div>
+	</div>
+	<div class="content">
+		<p>Reminders go here.</p>
+
         <form action="/logout" method="post">
             <div>
                 <button type="submit">Logout</button>
