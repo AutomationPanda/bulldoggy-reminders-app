@@ -26,4 +26,4 @@ router = APIRouter()
 
 @router.get("/reminders", summary="Logs into the app", response_class=HTMLResponse)
 async def get_reminders(request: Request, username: str = Depends(get_username_for_page)):
-  return templates.TemplateResponse("reminders.html", {'request': request})
+  return templates.TemplateResponse("reminders.html", {'request': request, 'username': username})
