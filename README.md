@@ -12,10 +12,9 @@ uvicorn main:app --reload
 
 ## TODO
 
-* Try using CSS grid layout for reminders page
-  * https://stackoverflow.com/questions/43747185/force-css-grid-container-to-fill-full-screen-of-device
-* Reminders page structure
-* Reminders page style
+* "Not Found" error page (versus API)
+* Reminders page lists
+* Reminders page reminders
 * HTMX interactions
 * UI tests
 * API tests (?)
