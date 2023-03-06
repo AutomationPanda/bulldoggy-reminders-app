@@ -30,14 +30,14 @@ body {
 
 .sidebar {
   background-color: #D0905D;
+  border-top: 1px solid #222222;
+  border-right: 1px solid #222222;
   width: 25%;
   height: 100%;
   position: fixed;
   top: 80px;
   left: 0;
   overflow: auto;
-  border-top: 1px solid #222222;
-  border-right: 1px solid #222222;
 }
 
 .inner-sidebar {
@@ -45,9 +45,11 @@ body {
 }
 
 .content {
+  background-color: #D0905D;
+  border-top: 1px solid #222222;
+  height: 100%;
   margin-left: 25%;
   padding: 20px;
-  border-top: 1px solid #222222;
 }
 
 button {

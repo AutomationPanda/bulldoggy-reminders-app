@@ -12,6 +12,7 @@ uvicorn main:app --reload
 
 ## TODO
 
+* Keep position of title bar fixed!
 * Reminders page structure
 * Reminders page style
 * HTMX interactions
