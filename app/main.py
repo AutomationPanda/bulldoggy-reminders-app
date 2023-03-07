@@ -6,14 +6,16 @@ This module is the main module for the FastAPI app.
 # Imports
 # --------------------------------------------------------------------------------
 
-from fastapi import FastAPI, Request
+from app import templates
+from app.utils.auth import AuthCookie, get_auth_cookie
+from app.utils.exceptions import UnauthorizedPageException
+from app.routers import api, login, reminders
+
+from fastapi import Depends, FastAPI, Request
 from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException
-
-from app import templates
-from app.utils.exceptions import UnauthorizedPageException
-from app.routers import api, login, reminders
+from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -55,8 +57,9 @@ async def page_not_found_exception_handler(request: Request, exc: HTTPException)
 # --------------------------------------------------------------------------------
 
 @app.get("/")
-async def read_root():
-  return {"Hello": "World"}
+async def read_root(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)):
+  path = '/reminders' if cookie else '/login'
+  return RedirectResponse(path, status_code=302)
 
 
 @app.get('/favicon.ico', include_in_schema=False)
