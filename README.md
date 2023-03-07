@@ -12,7 +12,6 @@ uvicorn main:app --reload
 
 ## TODO
 
-* "Not Found" error page (versus API)
 * Reminders page lists
 * Reminders page reminders
 * HTMX interactions

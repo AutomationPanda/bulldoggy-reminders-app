@@ -1,0 +1,36 @@
+body {
+  background-color: #D0905D;
+  font-family: PlayfairDisplay;
+}
+
+.not-found-page {
+  width: 400px;
+  padding: 5% 0 0;
+  margin: auto;
+}
+
+.not-found-content {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#not-found-title {
+  font-size: 2.5em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
+#bulldoggy-icon {
+  margin: 25px 0px;
+}
+
+.not-found-message {
+  font-style: italic;  
+}

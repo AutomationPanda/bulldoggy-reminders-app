@@ -7,9 +7,11 @@ This module is the main module for the FastAPI app.
 # --------------------------------------------------------------------------------
 
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException
 
+from app import templates
 from app.utils.exceptions import UnauthorizedPageException
 from app.routers import api, login, reminders
 
@@ -40,15 +42,28 @@ async def unauthorized_exception_handler(request: Request, exc: UnauthorizedPage
   return RedirectResponse('/login?unauthorized=True', status_code=302)
 
 
+@app.exception_handler(404)
+async def page_not_found_exception_handler(request: Request, exc: HTTPException):
+  if request.url.path.startswith('/api/'):
+    return JSONResponse({'detail': exc.detail}, status_code=exc.status_code)
+  else:
+    return RedirectResponse('/not-found')
+
+
 # --------------------------------------------------------------------------------
 # Routes
 # --------------------------------------------------------------------------------
 
 @app.get("/")
-def read_root():
+async def read_root():
   return {"Hello": "World"}
 
 
 @app.get('/favicon.ico', include_in_schema=False)
-async def favicon():
-    return FileResponse("static/img/favicon.ico")
+async def get_favicon():
+  return FileResponse("static/img/favicon.ico")
+
+
+@app.get('/not-found')
+async def get_not_found(request: Request):
+  return templates.TemplateResponse("not-found.html", {'request': request})
