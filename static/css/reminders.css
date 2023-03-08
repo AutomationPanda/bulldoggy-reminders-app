@@ -84,25 +84,25 @@ body {
   margin-block-end: 2em;
 }
 
-.reminder-list-name-row, .reminder-list-new-row {
+.reminder-row {
   display: flex;
   align-items: center;
   padding: 0 8px;
   border-bottom: 1px solid #BBBBBB;
 }
 
-.reminder-list-name-row p, .reminder-list-new-row p {
+.reminder-row p {
   flex-grow: 1;
   cursor: pointer;
 }
 
-.reminder-list-name-row img,.reminder-list-new-row img {
+.reminder-row img {
   height: 16px;
   margin: 0 5px;
   cursor: pointer;
 }
 
-.reminder-list-new-row p {
+.light-gray-text {
   color: #999999;
 }
 
