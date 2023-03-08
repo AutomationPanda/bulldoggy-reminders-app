@@ -68,16 +68,15 @@ body {
   padding: 25px 10% 0 0;
 }
 
-.reminders-list-card {
-  padding: 20px;
-  text-align: center;
-}
-
 .reminders-grid-items {
   grid-column: 2;
   grid-row: 2;
   background-color: #D0905D;
   padding: 25px 0 0 10%;
+}
+
+.reminders-card {
+  padding: 20px;
 }
 
 button {
