@@ -2,26 +2,27 @@
 <head>
     <title>Reminders | Bulldoggy reminders app</title>
     <link rel="stylesheet" type="text/css" href="/static/css/font-faces.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/paper-card.css">
     <link rel="stylesheet" type="text/css" href="/static/css/reminders.css">
 </head>
 <body>
     <div class="reminders-grid">
-        <div class="reminders-grid-title-left">
-            <div class="title-container-left">
-                <img id="bulldoggy-icon" src="/static/img/bulldoggy-100px.png" />
-                <h1 id="bulldoggy-title">Bulldoggy</h1>
-            </div>
-        </div>
-        <div class="reminders-grid-title-right">
-            <div class="title-container-right">
-                <p id="reminders-message">Reminders for {{username}}</p>
-                <form id="logout-form" action="/logout" method="post">
-                    <button type="submit">Logout</button>
-                </form>
+        <div class="reminders-grid-title">
+            <div class="title-card paper-card">
+                <div class="title-card-left">
+                    <img id="bulldoggy-icon" src="/static/img/bulldoggy-100px.png" />
+                    <h1 id="bulldoggy-title">Bulldoggy</h1>
+                </div>
+                <div class="title-card-right">
+                    <p id="reminders-message">Reminders for {{username}}</p>
+                    <form id="logout-form" action="/logout" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="reminders-grid-lists">
-            <div class="reminders-list-card">
+            <div class="reminders-list-card paper-card">
                 <h3>Reminder Lists</h3>
             </div>
         </div>
