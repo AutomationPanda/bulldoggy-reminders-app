@@ -106,6 +106,10 @@ body {
   color: #999999;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 .selected-list {
   font-weight: bold;
   background-color: #ffedd5;
