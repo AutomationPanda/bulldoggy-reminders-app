@@ -84,6 +84,10 @@ body {
   margin-block-end: 2em;
 }
 
+.selected-list {
+  font-weight: bold;
+}
+
 button {
   font-family: PlayfairDisplay;
   text-transform: uppercase;
