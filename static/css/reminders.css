@@ -84,6 +84,11 @@ body {
   margin-block-end: 2em;
 }
 
+.reminder-list-name-row {
+  display: flex;
+  align-items: center;
+}
+
 .selected-list {
   font-weight: bold;
 }
