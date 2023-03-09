@@ -1,6 +1,7 @@
 # reminders-web-app
 
-A web app for reminders built using FastAPI and HTMX
+A web app for reminders built using FastAPI and HTMX.
+It uses HTMX 1.8.6.
 
 
 ## Running the app
