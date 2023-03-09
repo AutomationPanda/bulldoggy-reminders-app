@@ -25,15 +25,7 @@
             <div class="reminders-card paper-card">
                 <h3 class="reminders-card-title">Reminder Lists</h3>
                 <div class="reminders-list-list">
-                    <div
-                        class="reminder-row light-gray-text"
-                        hx-get="/reminders/new-list-row"
-                        hx-trigger="click"
-                        hx-swap="outerHTML"
-                    >
-                        <p>New list</p>
-                        <img src="/static/img/icons/icon-add.svg" />
-                    </div>
+                    {% include "partials/reminders/new-list-row.html" %}
                 </div>
             </div>
         </div>
