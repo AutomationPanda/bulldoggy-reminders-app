@@ -69,4 +69,4 @@ async def get_favicon():
 
 @app.get('/not-found')
 async def get_not_found(request: Request):
-  return templates.TemplateResponse("not-found.html", {'request': request})
+  return templates.TemplateResponse("pages/not-found.html", {'request': request})

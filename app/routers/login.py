@@ -34,7 +34,7 @@ async def get_login(
   unauthorized: Optional[bool] = None):
 
   context = {'request': request, 'invalid': invalid, 'logged_out': logged_out, 'unauthorized': unauthorized}
-  return templates.TemplateResponse("login.html", context)
+  return templates.TemplateResponse("pages/login.html", context)
 
 
 @router.post("/login", summary="Logs into the app")
