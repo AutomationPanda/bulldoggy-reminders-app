@@ -32,3 +32,13 @@ async def get_reminders(request: Request, username: str = Depends(get_username_f
 @router.get("/reminders-frozen", summary="Logs into the app", response_class=HTMLResponse)
 async def get_reminders(request: Request, username: str = Depends(get_username_for_page)):
   return templates.TemplateResponse("pages/reminders-frozen.html", {'request': request, 'username': username})
+
+
+# --------------------------------------------------------------------------------
+# Routes for partials
+# --------------------------------------------------------------------------------
+
+@router.get("/reminders/new-list-row", response_class=HTMLResponse)
+async def get_reminders_new_list_row(request: Request, username: str = Depends(get_username_for_page)):
+  return templates.TemplateResponse("partials/reminders/new-list-row.html", {'request': request})
+
