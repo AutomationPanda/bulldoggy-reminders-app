@@ -13,3 +13,28 @@
   font-stretch: 75% 125%;
   font-style: italic;
 }
+
+::-moz-placeholder{
+  color:#808080;
+  opacity:1
+}
+
+:-ms-input-placeholder{
+  color:#808080
+}
+
+::-webkit-input-placeholder{
+  color:#808080
+}
+
+body {
+  background-color: #D0905D;
+  font-family: PlayfairDisplay;
+  box-sizing: border-box;
+}
+
+.paper-card {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
