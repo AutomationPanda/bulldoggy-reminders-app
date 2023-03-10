@@ -22,6 +22,7 @@ uvicorn app.main:app --reload
   * clicking the delete button removes a row
   * clicking check while editing updates a row
   * clicking x with editing ignores changes to a row
+  * saving while editing is disabled if the input is blank
   * clicking the "new" row enables editing for a new item
   * clicking a reminder item strikes it out
   * clickign a stricken reminder item unstrikes it
