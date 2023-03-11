@@ -52,7 +52,7 @@ async def get_reminders_new_list_row_input(request: Request, username: str = Dep
 async def post_reminders_new_list_row_added(
   request: Request,
   username: str = Depends(get_username_for_page),
-  new_list_name: str = Form()
+  list_name: str = Form()
 ):
-  context = {'request': request, 'new_list_name': new_list_name}
+  context = {'request': request, 'list_name': list_name}
   return templates.TemplateResponse("partials/reminders/new-list-row-added.html", context)
