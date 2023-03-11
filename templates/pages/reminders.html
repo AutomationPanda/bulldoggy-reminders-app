@@ -25,6 +25,9 @@
             <div class="reminders-card paper-card">
                 <h3 class="reminders-card-title">Reminder Lists</h3>
                 <div class="reminders-list-list">
+                    {% for list_name in reminder_lists %}
+                        {% include "partials/reminders/list-row.html" %}
+                    {% endfor %}
                     {% include "partials/reminders/new-list-row.html" %}
                 </div>
             </div>
