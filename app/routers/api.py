@@ -53,7 +53,7 @@ class UpdatedReminderList(BaseModel):
 @router.get("/reminders", summary="Get the user's reminder lists", response_model=list[ReminderList])
 async def get_reminders(
   username: str = Depends(get_username_for_api)
-  ) -> list[ReminderList]:
+) -> list[ReminderList]:
   """
   Gets the list of all reminder lists owned by the user.
   """
@@ -65,7 +65,7 @@ async def get_reminders(
 async def post_reminders(
   reminder_list: NewReminderList,
   username: str = Depends(get_username_for_api)
-  ) -> ReminderList:
+) -> ReminderList:
   """
   Creates a new reminder list for the user.
   """
@@ -81,7 +81,7 @@ async def post_reminders(
 async def get_reminders_id(
   reminders_id: int,
   username: str = Depends(get_username_for_api)
-  ) -> ReminderList:
+) -> ReminderList:
   """
   Gets the reminder list by ID.
   """
@@ -94,7 +94,7 @@ async def put_reminders_id(
   reminders_id: int,
   reminder_list: UpdatedReminderList,
   username: str = Depends(get_username_for_api)
-  ) -> ReminderList:
+) -> ReminderList:
   """
   Fully updates a reminder list for the user.
   """
@@ -109,7 +109,7 @@ async def put_reminders_id(
 async def delete_reminders_id(
   reminders_id: int,
   username: str = Depends(get_username_for_api)
-  ) -> dict:
+) -> dict:
   """
   Deletes the reminder list by ID.
   """
