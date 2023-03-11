@@ -43,9 +43,9 @@ async def get_reminders_new_list_row(request: Request, username: str = Depends(g
   return templates.TemplateResponse("partials/reminders/new-list-row.html", {'request': request})
 
 
-@router.get("/reminders/new-list-row-input", response_class=HTMLResponse)
+@router.get("/reminders/new-list-row-edit", response_class=HTMLResponse)
 async def get_reminders_new_list_row_input(request: Request, username: str = Depends(get_username_for_page)):
-  return templates.TemplateResponse("partials/reminders/new-list-row-input.html", {'request': request})
+  return templates.TemplateResponse("partials/reminders/new-list-row-edit.html", {'request': request})
 
 
 @router.post("/reminders/new-list-row-added", response_class=HTMLResponse)
