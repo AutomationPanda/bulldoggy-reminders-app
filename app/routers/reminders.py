@@ -56,3 +56,11 @@ async def post_reminders_new_list_row_added(
 ):
   context = {'request': request, 'list_name': list_name}
   return templates.TemplateResponse("partials/reminders/new-list-row-added.html", context)
+
+
+@router.delete("/reminders/list-row", response_class=HTMLResponse)
+async def post_reminders_new_list_row_added(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
+  return ""

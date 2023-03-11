@@ -25,7 +25,7 @@ uvicorn app.main:app --reload
   * saving while editing is disabled if the input is blank
   * clicking the "new" row enables editing for a new item
   * clicking a reminder item strikes it out
-  * clickign a stricken reminder item unstrikes it
+  * clicking a stricken reminder item unstrikes it
 
 * UI tests
 * API tests (?)

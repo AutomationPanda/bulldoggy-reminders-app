@@ -1,5 +1,12 @@
-<div class="reminder-row">
+<div class="reminder-row" hx-target="this">
   <p>{{ list_name }}</p>
-  <img src="/static/img/icons/icon-edit.svg" />
-  <img src="/static/img/icons/icon-delete.svg" />
+  <img
+    src="/static/img/icons/icon-edit.svg"
+  />
+  <img
+    src="/static/img/icons/icon-delete.svg"
+    hx-delete="/reminders/list-row"
+    hx-trigger="click"
+    hx-swap="outerHTML"
+  />
 </div>
