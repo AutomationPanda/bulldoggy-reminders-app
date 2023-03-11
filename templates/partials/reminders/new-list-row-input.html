@@ -5,7 +5,7 @@
     hx-post="/reminders/new-list-row-added"
     hx-include="[name='new_list_name']"
     hx-target=".new-list"
-    hx-trigger="click"
+    hx-trigger="click, keyup[key=='Enter'] from:[name='new_list_name']"
     hx-swap="outerHTML"
   />
   <img
