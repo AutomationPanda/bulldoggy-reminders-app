@@ -9,7 +9,7 @@ This module provides routes for the reminders pages.
 from app import templates
 from app.utils.auth import get_username_for_page
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse
 
 
@@ -46,3 +46,13 @@ async def get_reminders_new_list_row(request: Request, username: str = Depends(g
 @router.get("/reminders/new-list-row-input", response_class=HTMLResponse)
 async def get_reminders_new_list_row_input(request: Request, username: str = Depends(get_username_for_page)):
   return templates.TemplateResponse("partials/reminders/new-list-row-input.html", {'request': request})
+
+
+@router.post("/reminders/new-list-row-added", response_class=HTMLResponse)
+async def post_reminders_new_list_row_added(
+  request: Request,
+  username: str = Depends(get_username_for_page),
+  new_list_name: str = Form()
+):
+  context = {'request': request, 'new_list_name': new_list_name}
+  return templates.TemplateResponse("partials/reminders/new-list-row-added.html", context)

@@ -1,6 +1,13 @@
 <div class="reminder-row-with-input new-list">
-  <input type="text" placeholder="New list" autofocus />
-  <img src="/static/img/icons/icon-check-circle.svg" />
+  <input type="text" placeholder="New list" name="new_list_name" autofocus />
+  <img
+    src="/static/img/icons/icon-check-circle.svg"
+    hx-post="/reminders/new-list-row-added"
+    hx-include="[name='new_list_name']"
+    hx-target=".new-list"
+    hx-trigger="click"
+    hx-swap="outerHTML"
+  />
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/new-list-row"
