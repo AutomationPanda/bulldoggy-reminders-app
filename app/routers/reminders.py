@@ -25,15 +25,22 @@ router = APIRouter()
 # --------------------------------------------------------------------------------
 
 @router.get("/reminders", summary="Logs into the app", response_class=HTMLResponse)
-async def get_reminders(request: Request, username: str = Depends(get_username_for_page)):
+async def get_reminders(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
   reminder_lists = table.get_lists(username)
   context = {'request': request, 'username': username, 'reminder_lists': reminder_lists}
   return templates.TemplateResponse("pages/reminders.html", context)
 
 
 @router.get("/reminders-frozen", summary="Logs into the app", response_class=HTMLResponse)
-async def get_reminders(request: Request, username: str = Depends(get_username_for_page)):
-  return templates.TemplateResponse("pages/reminders-frozen.html", {'request': request, 'username': username})
+async def get_reminders(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
+  context = {'request': request, 'username': username}
+  return templates.TemplateResponse("pages/reminders-frozen.html", context)
 
 
 # --------------------------------------------------------------------------------
@@ -41,12 +48,18 @@ async def get_reminders(request: Request, username: str = Depends(get_username_f
 # --------------------------------------------------------------------------------
 
 @router.get("/reminders/new-list-row", response_class=HTMLResponse)
-async def get_reminders_new_list_row(request: Request, username: str = Depends(get_username_for_page)):
+async def get_reminders_new_list_row(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
   return templates.TemplateResponse("partials/reminders/new-list-row.html", {'request': request})
 
 
 @router.get("/reminders/new-list-row-edit", response_class=HTMLResponse)
-async def get_reminders_new_list_row_input(request: Request, username: str = Depends(get_username_for_page)):
+async def get_reminders_new_list_row_input(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
   return templates.TemplateResponse("partials/reminders/new-list-row-edit.html", {'request': request})
 
 
