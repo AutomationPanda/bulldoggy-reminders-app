@@ -25,10 +25,10 @@
             <div class="reminders-card paper-card">
                 <h3 class="reminders-card-title">Reminder Lists</h3>
                 <div class="reminders-list-list">
-                    <!-- This won't work. Each reminder list is an object, not just a name. -->
-                    <!-- {% for list_name in reminder_lists %}
+
+                    {% for reminder_list in reminder_lists %}
                         {% include "partials/reminders/list-row.html" %}
-                    {% endfor %} -->
+                    {% endfor %}
                     {% include "partials/reminders/new-list-row.html" %}
                 </div>
             </div>

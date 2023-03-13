@@ -1,11 +1,11 @@
 <div class="reminder-row" hx-target="this">
-  <p>{{ list_name }}</p>
+  <p>{{ reminder_list.name }}</p>
   <img
     src="/static/img/icons/icon-edit.svg"
   />
   <img
     src="/static/img/icons/icon-delete.svg"
-    hx-delete="/reminders/list-row"
+    hx-delete="/reminders/list-row/{{ reminder_list.id }}"
     hx-trigger="click"
     hx-swap="outerHTML"
   />

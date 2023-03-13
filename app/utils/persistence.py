@@ -10,7 +10,7 @@ from app.utils.exceptions import NotFoundException, ForbiddenException
 
 from tinydb import TinyDB, Query
 from tinydb.table import Document
-from typing import List
+from typing import List, Optional
 
 
 # --------------------------------------------------------------------------------
@@ -26,9 +26,12 @@ class RemindersTable:
     self._table = self._db.table('reminders')
 
 
-  def create_list(self, reminder_list: dict) -> int:
-    if reminder_list["reminders"] is None:
-      reminder_list["reminders"] = list()
+  def create_list(self, name: str, username: str, reminders: Optional[List] = None) -> int:
+    reminder_list = {
+      'name': name,
+      'owner': username,
+      'reminders': list() if reminders is None else reminders
+    }
 
     list_id = self._table.insert(reminder_list)
     return list_id

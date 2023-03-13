@@ -70,9 +70,10 @@ async def post_reminders(
   Creates a new reminder list for the user.
   """
 
-  new_list = reminder_list.dict()
-  new_list["owner"] = username
-  reminders_id = table.create_list(new_list)
+  reminders_id = table.create_list(
+    reminder_list.name,
+    username,
+    reminder_list.reminders)
 
   return table.get_list(reminders_id, username)
 

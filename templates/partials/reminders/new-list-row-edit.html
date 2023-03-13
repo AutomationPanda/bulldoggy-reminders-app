@@ -2,14 +2,14 @@
   <input
     type="text"
     placeholder="New list"
-    name="list_name"
+    name="reminder_list_name"
     autofocus
   />
   <img
     src="/static/img/icons/icon-check-circle.svg"
     hx-post="/reminders/new-list-row-added"
-    hx-include="[name='list_name']"
-    hx-trigger="click, keyup[key=='Enter'] from:[name='list_name']"
+    hx-include="[name='reminder_list_name']"
+    hx-trigger="click, keyup[key=='Enter'] from:[name='reminder_list_name']"
     hx-swap="outerHTML"
   />
   <img
