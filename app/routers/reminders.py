@@ -47,14 +47,48 @@ async def get_reminders(
 # Routes for partials
 # --------------------------------------------------------------------------------
 
-@router.delete("/reminders/list-row/{reminders_id}", response_class=HTMLResponse)
-async def post_reminders_new_list_row_added(
+@router.get("/reminders/list-row/{reminders_id}", response_class=HTMLResponse)
+async def get_reminders_list_row(
   reminders_id: int,
   request: Request,
   username: str = Depends(get_username_for_page)
 ):
+  reminder_list = table.get_list(reminders_id, username)
+  context = {'request': request, 'reminder_list': reminder_list}
+  return templates.TemplateResponse("partials/reminders/list-row.html", context)
+
+
+@router.delete("/reminders/list-row/{reminders_id}", response_class=HTMLResponse)
+async def delete_reminders_list_row(
+  reminders_id: int,
+  username: str = Depends(get_username_for_page)
+):
   table.delete_list(reminders_id, username)
   return ""
+
+
+@router.patch("/reminders/list-row-name/{reminders_id}", response_class=HTMLResponse)
+async def patch_reminders_list_row_name(
+  reminders_id: int,
+  request: Request,
+  username: str = Depends(get_username_for_page),
+  new_name: str = Form()
+):
+  table.update_list_name(reminders_id, username, new_name)
+  reminder_list = table.get_list(reminders_id, username)
+  context = {'request': request, 'reminder_list': reminder_list}
+  return templates.TemplateResponse("partials/reminders/list-row.html", context)
+
+
+@router.get("/reminders/list-row-edit/{reminders_id}", response_class=HTMLResponse)
+async def get_reminders_list_row_edit(
+  reminders_id: int,
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
+  reminder_list = table.get_list(reminders_id, username)
+  context = {'request': request, 'reminder_list': reminder_list}
+  return templates.TemplateResponse("partials/reminders/list-row-edit.html", context)
 
 
 @router.get("/reminders/new-list-row", response_class=HTMLResponse)
@@ -67,7 +101,7 @@ async def get_reminders_new_list_row(
 
 
 @router.get("/reminders/new-list-row-edit", response_class=HTMLResponse)
-async def get_reminders_new_list_row_input(
+async def get_reminders_new_list_row_edit(
   request: Request,
   username: str = Depends(get_username_for_page)
 ):

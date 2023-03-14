@@ -65,6 +65,12 @@ class RemindersTable:
   
 
   def update_list(self, reminders_id: int, reminder_list: dict, username: str) -> None:
+    self.get_list(reminders_id, username)
+    self._table.update(reminder_list, doc_ids=[reminders_id])
+  
+
+  def update_list_name(self, reminders_id: int, username: str, new_name: str) -> None:
     reminder_list = self.get_list(reminders_id, username)
+    reminder_list['name'] = new_name
     self._table.update(reminder_list, doc_ids=[reminders_id])
   

@@ -1,0 +1,23 @@
+<div class="reminder-row-with-input" hx-target="this">
+  <input
+    type="text"
+    value="{{ reminder_list.name }}"
+    placeholder="{{ reminder_list.name }}"
+    name="new_name"
+    onfocus="this.select();"
+    autofocus
+  />
+  <img
+    src="/static/img/icons/icon-check-circle.svg"
+    hx-patch="/reminders/list-row-name/{{ reminder_list.id }}"
+    hx-include="[name='new_name']"
+    hx-trigger="click, keyup[key=='Enter'] from:[name='new_name']"
+    hx-swap="outerHTML"
+  />
+  <img
+    src="/static/img/icons/icon-x-circle.svg"
+    hx-get="/reminders/list-row/{{ reminder_list.id }}"
+    hx-trigger="click, click from:.reminder-row"
+    hx-swap="outerHTML"
+  />
+</div>

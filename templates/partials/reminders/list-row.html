@@ -2,6 +2,9 @@
   <p>{{ reminder_list.name }}</p>
   <img
     src="/static/img/icons/icon-edit.svg"
+    hx-get="/reminders/list-row-edit/{{ reminder_list.id }}"
+    hx-trigger="click"
+    hx-swap="outerHTML"
   />
   <img
     src="/static/img/icons/icon-delete.svg"
