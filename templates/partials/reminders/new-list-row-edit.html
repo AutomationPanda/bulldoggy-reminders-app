@@ -1,4 +1,4 @@
-<div class="reminder-row-with-input" hx-target="this">
+<div class="reminder-row-with-input">
   <input
     type="text"
     placeholder="New list"
@@ -7,14 +7,16 @@
   />
   <img
     src="/static/img/icons/icon-check-circle.svg"
-    hx-post="/reminders/new-list-row-added"
+    hx-post="/reminders/new-list-row"
     hx-include="[name='reminder_list_name']"
+    hx-target=".reminders-grid"
     hx-trigger="click, keyup[key=='Enter'] from:[name='reminder_list_name']"
     hx-swap="outerHTML"
   />
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/new-list-row"
+    hx-target=".reminder-row-with-input"
     hx-trigger="click, click from:.reminder-row"
     hx-swap="outerHTML"
   />

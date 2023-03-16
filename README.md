@@ -14,7 +14,6 @@ uvicorn app.main:app --reload
 ## TODO
 
 * HTMX interactions
-  * loading the page
   * hovering over a row shows the icons
   * hovering away from a row removes the icons
   * clicking a reminders list row selects it
@@ -26,6 +25,7 @@ uvicorn app.main:app --reload
   * clicking the "new" row enables editing for a new item
   * clicking a reminder item strikes it out
   * clicking a stricken reminder item unstrikes it
+  * deleting a selected list automatically selects the first list
 
 * UI tests
 * API tests (?)
