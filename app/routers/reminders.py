@@ -11,6 +11,7 @@ from app.utils.auth import get_username_for_page
 
 from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse
+from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -113,10 +114,15 @@ async def get_reminders_new_list_row_edit(
 async def post_reminders_new_list_row_added(
   request: Request,
   username: str = Depends(get_username_for_page),
-  reminder_list_name: str = Form()
+  reminder_list_name: Optional[str] = Form(None)
 ):
+  context = {'request': request}
+
+  if not reminder_list_name:
+    return templates.TemplateResponse("partials/reminders/new-list-row-edit.html", context)
+
   reminders_id = table.create_list(reminder_list_name, username)
   reminder_list = table.get_list(reminders_id, username)
 
-  context = {'request': request, 'reminder_list': reminder_list}
+  context['reminder_list'] = reminder_list
   return templates.TemplateResponse("partials/reminders/new-list-row-added.html", context)
