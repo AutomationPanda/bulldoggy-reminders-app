@@ -20,9 +20,8 @@ from typing import List, Optional
 class RemindersTable:
   
 
-  def __init__(self, db_path: str = 'reminder_db.json') -> None:
-    self._db_path = db_path
-    self._db = TinyDB(db_path)
+  def __init__(self, db: TinyDB) -> None:
+    self._db = db
     self._table = self._db.table('reminders')
 
 

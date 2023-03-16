@@ -10,6 +10,7 @@ import json
 
 from app.utils.persistence import RemindersTable
 from fastapi.templating import Jinja2Templates
+from tinydb import TinyDB
 
 
 # --------------------------------------------------------------------------------
@@ -32,7 +33,8 @@ secret_key = config['secret_key']
 # Connect the Database
 # --------------------------------------------------------------------------------
 
-reminders_table = RemindersTable()
+db = TinyDB('reminder_db.json')
+reminders_table = RemindersTable(db)
 
 
 # --------------------------------------------------------------------------------
