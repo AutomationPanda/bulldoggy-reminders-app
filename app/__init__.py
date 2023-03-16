@@ -32,7 +32,7 @@ secret_key = config['secret_key']
 # Connect the Database
 # --------------------------------------------------------------------------------
 
-table = RemindersTable()
+reminders_table = RemindersTable()
 
 
 # --------------------------------------------------------------------------------
