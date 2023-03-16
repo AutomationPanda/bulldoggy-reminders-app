@@ -1,5 +1,13 @@
-<div class="reminder-row" hx-target="this">
-  <p>{{ reminder_list.name }}</p>
+<div
+  class="reminder-row{{ " selected-list" if reminder_list.id == selected_list }}"
+  hx-target="this"
+>
+  <p
+    hx-get="/reminders/grid?selected_list={{ reminder_list.id }}"
+    hx-trigger="click"
+    hx-swap="outerHTML"
+    hx-target=".reminders-grid"
+  >{{ reminder_list.name }}</p>
   <img
     src="/static/img/icons/icon-edit.svg"
     hx-get="/reminders/list-row-edit/{{ reminder_list.id }}"

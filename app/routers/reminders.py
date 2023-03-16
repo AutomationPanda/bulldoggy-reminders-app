@@ -31,7 +31,15 @@ async def get_reminders(
   username: str = Depends(get_username_for_page)
 ):
   reminder_lists = table.get_lists(username)
-  context = {'request': request, 'username': username, 'reminder_lists': reminder_lists}
+
+  context = {
+    'request': request,
+    'username': username,
+    'reminder_lists': reminder_lists}
+  
+  if len(reminder_lists) > 0:
+    context['selected_list'] = reminder_lists[0]['id']
+
   return templates.TemplateResponse("pages/reminders.html", context)
 
 
@@ -47,6 +55,23 @@ async def get_reminders(
 # --------------------------------------------------------------------------------
 # Routes for partials
 # --------------------------------------------------------------------------------
+
+@router.get("/reminders/grid", response_class=HTMLResponse)
+async def get_reminders_list_row(
+  request: Request,
+  username: str = Depends(get_username_for_page),
+  selected_list: Optional[int] = None
+):
+  reminder_lists = table.get_lists(username)
+
+  context = {
+    'request': request,
+    'username': username,
+    'reminder_lists': reminder_lists,
+    'selected_list': selected_list}
+  
+  return templates.TemplateResponse("partials/reminders/grid.html", context)
+
 
 @router.get("/reminders/list-row/{reminders_id}", response_class=HTMLResponse)
 async def get_reminders_list_row(
