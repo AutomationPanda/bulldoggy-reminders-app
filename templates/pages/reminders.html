@@ -6,34 +6,6 @@
     <script src="/static/js/htmx.min.js"></script>
 </head>
 <body>
-    <div class="reminders-grid">
-        <div class="reminders-grid-title">
-            <div class="title-card paper-card">
-                <div class="title-card-left">
-                    <img id="bulldoggy-logo" src="/static/img/logos/bulldoggy-100px.png" />
-                    <h1 id="bulldoggy-title">Bulldoggy</h1>
-                </div>
-                <div class="title-card-right">
-                    <p id="reminders-message">Reminders for {{username}}</p>
-                    <form id="logout-form" action="/logout" method="post">
-                        <button type="submit">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="reminders-grid-lists">
-            <div class="reminders-card paper-card">
-                <h3 class="reminders-card-title">Reminder Lists</h3>
-                <div class="reminders-list-list">
-                    {% for reminder_list in reminder_lists %}
-                        {% include "partials/reminders/list-row.html" %}
-                    {% endfor %}
-                    {% include "partials/reminders/new-list-row.html" %}
-                </div>
-            </div>
-        </div>
-        <div class="reminders-grid-items">
-        </div>
-    </div>
+    {% include "partials/reminders/grid.html" %}
 </body>
 </html>
