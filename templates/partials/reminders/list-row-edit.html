@@ -1,6 +1,6 @@
 <div
   class="reminder-row-with-input{{ " selected-list" if reminder_list.id == selected_list }}"
-  hx-target="this"
+  data-id="reminder-row-{{ reminder_list.id }}"
 >
   <input
     type="text"
@@ -21,6 +21,7 @@
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/list-row/{{ reminder_list.id }}"
+    hx-target="[data-id='reminder-row-{{ reminder_list.id }}']"
     hx-trigger="click, click from:.reminder-row"
     hx-swap="outerHTML"
   />

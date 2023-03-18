@@ -1,4 +1,7 @@
-<div class="reminder-row-with-input">
+<div
+  class="reminder-row-with-input"
+  data-id="new-reminder-row"
+>
   <input
     type="text"
     placeholder="New list"
@@ -16,7 +19,7 @@
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/new-list-row"
-    hx-target=".reminder-row-with-input"
+    hx-target="[data-id='new-reminder-row']"
     hx-trigger="click, click from:.reminder-row"
     hx-swap="outerHTML"
   />
