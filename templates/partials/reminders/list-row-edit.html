@@ -1,4 +1,7 @@
-<div class="reminder-row-with-input" hx-target="this">
+<div
+  class="reminder-row-with-input{{ " selected-list" if reminder_list.id == selected_list }}"
+  hx-target="this"
+>
   <input
     type="text"
     value="{{ reminder_list.name }}"
@@ -11,6 +14,7 @@
     src="/static/img/icons/icon-check-circle.svg"
     hx-patch="/reminders/list-row-name/{{ reminder_list.id }}"
     hx-include="[name='new_name']"
+    hx-target=".reminders-grid"
     hx-trigger="click, keyup[key=='Enter'] from:[name='new_name']"
     hx-swap="outerHTML"
   />

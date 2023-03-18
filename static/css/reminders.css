@@ -132,6 +132,10 @@ body {
   font-size: 1em;
 }
 
+.reminder-row-with-input.selected-list input {
+  background: #FFDBAD;
+}
+
 .light-gray-text {
   color: #808080;
 }

@@ -92,3 +92,9 @@ class ReminderStorage:
       self._selected_table.update({'reminders_id': reminders_id}, Query().username == username)
     else:
       self._selected_table.insert({'username': username, 'reminders_id': reminders_id})
+
+
+  def reset_selected_reminders(self, username: str) -> None:
+    reminder_lists = self._reminders_table.all()
+    reminders_id = reminder_lists[0].doc_id if reminder_lists else None
+    self.set_selected_reminders(reminders_id, username)

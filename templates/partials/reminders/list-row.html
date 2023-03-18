@@ -3,10 +3,10 @@
   hx-target="this"
 >
   <p
-    hx-get="/reminders/grid?selected_list={{ reminder_list.id }}"
+    hx-post="/reminders/select/{{ reminder_list.id }}"
+    hx-target=".reminders-grid"
     hx-trigger="click"
     hx-swap="outerHTML"
-    hx-target=".reminders-grid"
   >{{ reminder_list.name }}</p>
   <img
     src="/static/img/icons/icon-edit.svg"
@@ -17,6 +17,7 @@
   <img
     src="/static/img/icons/icon-delete.svg"
     hx-delete="/reminders/list-row/{{ reminder_list.id }}"
+    hx-target=".reminders-grid"
     hx-trigger="click"
     hx-swap="outerHTML"
   />
