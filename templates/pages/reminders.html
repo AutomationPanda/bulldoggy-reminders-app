@@ -6,6 +6,18 @@
     <script src="/static/js/htmx.min.js"></script>
 </head>
 <body>
-    {% include "partials/reminders/grid.html" %}
+    <div class="title-card paper-card">
+        <div class="title-card-left">
+            <img id="bulldoggy-logo" src="/static/img/logos/bulldoggy-100px.png" />
+            <h1 id="bulldoggy-title">Bulldoggy</h1>
+        </div>
+        <div class="title-card-right">
+            <p id="reminders-message">Reminders for {{username}}</p>
+            <form id="logout-form" action="/logout" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+    {% include "partials/reminders/content.html" %}
 </body>
 </html>

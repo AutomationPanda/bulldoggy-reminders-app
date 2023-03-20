@@ -1,0 +1,15 @@
+<div class="reminders-content">
+    <div class="reminders-content-lists">
+        <div class="reminders-card paper-card">
+            <h3 class="reminders-card-title">Reminder Lists</h3>
+            <div class="reminders-list-list">
+                {% for reminder_list in reminder_lists %}
+                    {% include "partials/reminders/list-row.html" %}
+                {% endfor %}
+                {% include "partials/reminders/new-list-row.html" %}
+            </div>
+        </div>
+    </div>
+    <div class="reminders-content-items">
+    </div>
+</div>

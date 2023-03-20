@@ -15,23 +15,11 @@ body {
   }
 }
 
-.reminders-grid {
-  display: grid;
-  grid-template-columns: 40% 60% auto;
-  grid-template-rows: 120px calc(100vh - 120px) auto;
-  gap: 0px;
-}
-
-.reminders-grid-title {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  padding: 20px 0;
-}
-
 .title-card {
   color: black;
   display: flex;
   height: 80px;
+  margin: 20px 0;
 }
 
 .title-card-left {
@@ -70,18 +58,21 @@ body {
   margin: 0 20px 0 0;
 }
 
-.reminders-grid-lists {
-  grid-column: 1;
-  grid-row: 2;
-  background-color: #D0905D;
-  padding: 20px 20px 0 0;
+.reminders-content {
+  display: flex;
+  height: calc(100vh - 120px);
 }
 
-.reminders-grid-items {
-  grid-column: 2;
-  grid-row: 2;
+.reminders-content-lists {
+  background-color: #D0905D;
+  padding: 20px 20px 0 0;
+  width: 40%;
+}
+
+.reminders-content-items {
   background-color: #D0905D;
   padding: 20px 0 0 20px;
+  width: 60%;
 }
 
 .reminders-card {

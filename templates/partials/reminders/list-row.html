@@ -4,7 +4,7 @@
 >
   <p
     hx-post="/reminders/select/{{ reminder_list.id }}"
-    hx-target=".reminders-grid"
+    hx-target=".reminders-content"
     hx-trigger="click"
     hx-swap="outerHTML"
   >{{ reminder_list.name }}</p>
@@ -18,7 +18,7 @@
   <img
     src="/static/img/icons/icon-delete.svg"
     hx-delete="/reminders/list-row/{{ reminder_list.id }}"
-    hx-target=".reminders-grid"
+    hx-target=".reminders-content"
     hx-trigger="click"
     hx-swap="outerHTML"
   />
