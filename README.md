@@ -13,19 +13,13 @@ uvicorn app.main:app --reload
 
 ## TODO
 
-* HTMX interactions
+* Refactor storage to put reminder items into their own table
+
+* Implement reminder items
   * hovering over a row shows the icons
   * hovering away from a row removes the icons
-  * clicking a reminders list row selects it
-  * clicking the edit button enables editing a row
-  * clicking the delete button removes a row
-  * clicking check while editing updates a row
-  * clicking x with editing ignores changes to a row
-  * saving while editing is disabled if the input is blank
-  * clicking the "new" row enables editing for a new item
-  * clicking a reminder item strikes it out
-  * clicking a stricken reminder item unstrikes it
-  * deleting a selected list automatically selects the first list
+  * clicking a reminder item strikes it out / unstrikes it
 
+* Fix the API
 * UI tests
 * API tests (?)
