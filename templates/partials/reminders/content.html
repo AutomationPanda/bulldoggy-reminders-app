@@ -13,44 +13,12 @@
     <div class="reminders-content-items">
         {% if selected_list %}
         <div class="reminders-card paper-card">
-            <h3 class="reminders-card-title">[List Name]</h3>
+            <h3 class="reminders-card-title">{{ selected_list.name }}</h3>
             <div class="reminders-item-list">
-                <!--
-                <div class="reminder-row">
-                    <p>Mow the lawn</p>
-                    <img src="/static/img/icons/icon-edit.svg" />
-                    <img src="/static/img/icons/icon-delete.svg" />
-                </div>
-                <div class="reminder-row completed">
-                    <p>Walk the dog</p>
-                    <img src="/static/img/icons/icon-edit.svg" />
-                    <img src="/static/img/icons/icon-delete.svg" />
-                </div>
-                <div class="reminder-row completed">
-                    <p>Do the laundry</p>
-                    <img src="/static/img/icons/icon-edit.svg" />
-                    <img src="/static/img/icons/icon-delete.svg" />
-                </div>
-                <div class="reminder-row">
-                    <p>Vacuum the carpet</p>
-                    <img src="/static/img/icons/icon-edit.svg" />
-                    <img src="/static/img/icons/icon-delete.svg" />
-                </div>
-                <div class="reminder-row">
-                    <p>Wash the dishes</p>
-                    <img src="/static/img/icons/icon-edit.svg" />
-                    <img src="/static/img/icons/icon-delete.svg" />
-                </div>
-                <div class="reminder-row-with-input">
-                    <input type="text" value="Get the mail"></input>
-                    <img src="/static/img/icons/icon-check-circle.svg" />
-                    <img src="/static/img/icons/icon-x-circle.svg" />
-                </div>
-                -->
-                <div class="reminder-row light-gray-text">
-                    <p>New reminder</p>
-                    <img src="/static/img/icons/icon-add.svg" />
-                </div>
+                {% for reminder_item in selected_list.reminders %}
+                    {% include "partials/reminders/item-row.html" %}
+                {% endfor %}
+                {% include "partials/reminders/new-item-row.html" %}
             </div>
         </div>
         {% endif %}

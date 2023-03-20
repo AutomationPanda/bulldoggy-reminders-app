@@ -66,7 +66,7 @@ async def get_reminders(
 
 
 # --------------------------------------------------------------------------------
-# Routes for partials
+# Routes for list row partials
 # --------------------------------------------------------------------------------
 
 @router.get("/reminders/list-row/{reminders_id}", response_class=HTMLResponse)
@@ -153,3 +153,36 @@ async def post_reminders_select(
 ):
   storage.set_selected_reminders(reminders_id, username)
   return _get_reminders_grid(request, username)
+
+
+# --------------------------------------------------------------------------------
+# Routes for item row partials
+# --------------------------------------------------------------------------------
+
+@router.get("/reminders/new-item-row", response_class=HTMLResponse)
+async def get_reminders_new_item_row(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
+  context = {'request': request}
+  return templates.TemplateResponse("partials/reminders/new-item-row.html", context)
+
+
+@router.post("/reminders/new-item-row", response_class=HTMLResponse)
+async def post_reminders_new_item_row(
+  request: Request,
+  username: str = Depends(get_username_for_page),
+  reminder_item_name: str = Form()
+):
+  selected_list = storage.get_selected_reminders(username)
+  storage.add_list_item(selected_list['id'], username, reminder_item_name)
+  return _get_reminders_grid(request, username)
+
+
+@router.get("/reminders/new-item-row-edit", response_class=HTMLResponse)
+async def get_reminders_new_item_row_edit(
+  request: Request,
+  username: str = Depends(get_username_for_page)
+):
+  context = {'request': request}
+  return templates.TemplateResponse("partials/reminders/new-item-row-edit.html", context)

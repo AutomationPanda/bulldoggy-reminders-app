@@ -27,7 +27,7 @@ class ReminderStorage:
     self._selected_table = self._db.table('selected')
 
 
-  # Reminders
+  # Reminder Lists
 
   def create_list(self, name: str, username: str, reminders: Optional[List] = None) -> int:
     reminder_list = {
@@ -77,6 +77,19 @@ class ReminderStorage:
     reminder_list['name'] = new_name
     self._reminders_table.update(reminder_list, doc_ids=[reminders_id])
   
+
+  # Reminder Items
+
+  def add_list_item(self, reminders_id: int, username: str, new_item: str) -> None:
+    reminder_item = {
+      'description': new_item,
+      'completed': False,
+    }
+
+    reminder_list = self.get_list(reminders_id, username)
+    reminder_list['reminders'].append(reminder_item)
+    self._reminders_table.update(reminder_list, doc_ids=[reminders_id])
+
 
   # Selected
 
