@@ -11,6 +11,7 @@
         </div>
     </div>
     <div class="reminders-content-items">
+        {% if selected_list %}
         <div class="reminders-card paper-card">
             <h3 class="reminders-card-title">[List Name]</h3>
             <div class="reminders-item-list">
@@ -52,5 +53,6 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
