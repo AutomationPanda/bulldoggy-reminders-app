@@ -80,9 +80,22 @@ class ReminderStorage:
 
   # Selected
 
-  def get_selected_reminders(self, username: str) -> Optional[int]:
+  def get_selected_reminders(self, username: str) -> Optional[Document]:
     selected_list = self._selected_table.search(Query().username == username)
-    return selected_list[0]['reminders_id'] if selected_list else None
+    if not selected_list:
+      return None
+    
+    reminders_id = selected_list[0]['reminders_id']
+    if reminders_id is None:
+      return None
+
+    try:
+      reminders_list = self.get_list(reminders_id, username)
+    except:
+      self._selected_table.update({'reminders_id': None}, Query().username == username)
+      return None
+
+    return reminders_list
 
 
   def set_selected_reminders(self, reminders_id: Optional[int], username: str) -> None:
@@ -94,7 +107,10 @@ class ReminderStorage:
       self._selected_table.insert({'username': username, 'reminders_id': reminders_id})
 
 
-  def reset_selected_reminders(self, username: str) -> None:
-    reminder_lists = self._reminders_table.all()
-    reminders_id = reminder_lists[0].doc_id if reminder_lists else None
-    self.set_selected_reminders(reminders_id, username)
+  def reset_selected_after_delete(self, deleted_id: int, username: str) -> None:
+    selected_list = self._selected_table.search(Query().username == username)
+
+    if selected_list and selected_list[0]['reminders_id'] == deleted_id:
+      reminder_lists = self._reminders_table.all()
+      reminders_id = reminder_lists[0].doc_id if reminder_lists else None
+      self.set_selected_reminders(reminders_id, username)
