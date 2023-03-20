@@ -11,7 +11,6 @@ from app.utils.auth import get_username_for_page
 
 from fastapi import APIRouter, Depends, Form, Request
 from fastapi.responses import HTMLResponse
-from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -92,7 +91,7 @@ async def delete_reminders_list_row(
 
   if reminders_id == storage.get_selected_reminders(username):
     storage.reset_selected_reminders(username)
-    
+
   return _get_reminders_grid(request, username)
 
 
