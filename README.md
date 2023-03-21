@@ -13,10 +13,6 @@ uvicorn app.main:app --reload
 
 ## TODO
 
-* Implement reminder items
-  * hovering over a row shows the icons
-  * hovering away from a row removes the icons
-
 * Fix the API
 * UI tests
 * API tests (?)
