@@ -13,6 +13,7 @@ uvicorn app.main:app --reload
 
 ## TODO
 
+* Write a better README
 * Fix the API
 * UI tests
 * API tests (?)
