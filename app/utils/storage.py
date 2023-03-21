@@ -31,6 +31,13 @@ class ReminderList(BaseModel):
   name: str
 
 
+class SelectedList(BaseModel):
+  id: int
+  owner: str
+  name: str
+  items: list[ReminderItem]
+
+
 # --------------------------------------------------------------------------------
 # ReminderStorage Class
 # --------------------------------------------------------------------------------
@@ -108,11 +115,18 @@ class ReminderStorage:
     self._verify_list_exists(list_id)
     item_id = self._items_table.insert(reminder_item)
     return item_id
+  
+
+  def get_items(self, list_id: int) -> list[ReminderItem]:
+    self._verify_list_exists(list_id)
+    items = self._items_table.search(Query().list_id == list_id)
+    models = [ReminderItem(id=item.doc_id, ** item) for item in items]
+    return models
 
 
-  # Selected
+  # Selected Lists
 
-  def get_selected_list(self) -> Optional[ReminderList]:
+  def get_selected_list(self) -> Optional[SelectedList]:
     selected_list = self._selected_table.search(Query().owner == self.owner)
     if not selected_list:
       return None
@@ -122,12 +136,17 @@ class ReminderStorage:
       return None
 
     try:
-      reminders_list = self.get_list(list_id)
+      reminder_list = self.get_list(list_id)
+      reminder_items = self.get_items(list_id)
     except:
       self._selected_table.update({'list_id': None}, Query().owner == self.owner)
       return None
 
-    return reminders_list
+    return SelectedList(
+      id=reminder_list.id,
+      owner=reminder_list.owner,
+      name=reminder_list.name,
+      items=reminder_items)
 
 
   def set_selected_list(self, list_id: Optional[int]) -> None:

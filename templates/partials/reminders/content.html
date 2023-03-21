@@ -15,7 +15,7 @@
         <div class="reminders-card paper-card">
             <h3 class="reminders-card-title">{{ selected_list.name }}</h3>
             <div class="reminders-item-list">
-                {% for reminder_item in selected_list.reminders %}
+                {% for reminder_item in selected_list.items %}
                     {% include "partials/reminders/item-row.html" %}
                 {% endfor %}
                 {% include "partials/reminders/new-item-row.html" %}
