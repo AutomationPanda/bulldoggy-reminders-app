@@ -42,15 +42,15 @@ class ReminderStorage:
     self.owner = owner
     self._db_path = db_path
     self._db = TinyDB(db_path)
-    self._reminder_lists_table = self._db.table('reminder_lists')
-    self._reminder_items_table = self._db.table('reminder_items')
-    self._selected_table = self._db.table('selected')
+    self._lists_table = self._db.table('reminder_lists')
+    self._items_table = self._db.table('reminder_items')
+    self._selected_table = self._db.table('selected_lists')
 
 
   # Private Methods
 
   def _get_raw_list(self, list_id: int) -> Document:
-    reminder_list = self._reminder_lists_table.get(doc_id=list_id)
+    reminder_list = self._lists_table.get(doc_id=list_id)
 
     if not reminder_list:
       raise NotFoundException()
@@ -58,19 +58,23 @@ class ReminderStorage:
       raise ForbiddenException()
     
     return reminder_list
+  
+  def _verify_list_exists(self, list_id: int) -> None:
+    # Just get the list and make sure no exceptions happen
+    self._get_raw_list(list_id)
 
 
   # Reminder Lists
 
   def create_list(self, name: str) -> int:
     reminder_list = {'name': name, 'owner': self.owner}
-    list_id = self._reminder_lists_table.insert(reminder_list)
+    list_id = self._lists_table.insert(reminder_list)
     return list_id
   
 
   def delete_list(self, list_id: int) -> None:
-    self.get_list(list_id)
-    self._reminder_lists_table.remove(doc_ids=[list_id])
+    self._verify_list_exists(list_id)
+    self._lists_table.remove(doc_ids=[list_id])
 
 
   def get_list(self, list_id: int) -> ReminderList:
@@ -81,7 +85,7 @@ class ReminderStorage:
 
 
   def get_lists(self) -> list[ReminderList]:
-    reminder_lists = self._reminder_lists_table.search(Query().owner == self.owner)
+    reminder_lists = self._lists_table.search(Query().owner == self.owner)
     models = [ReminderList(id=rems.doc_id, **rems) for rems in reminder_lists]
     return models
   
@@ -89,20 +93,21 @@ class ReminderStorage:
   def update_list_name(self, list_id: int, new_name: str) -> None:
     reminder_list = self._get_raw_list(list_id)
     reminder_list['name'] = new_name
-    self._reminder_lists_table.update(reminder_list, doc_ids=[list_id])
+    self._lists_table.update(reminder_list, doc_ids=[list_id])
   
 
   # Reminder Items
 
-  # def add_item(self, list_id: int, owner: str, new_item: str) -> None:
-  #   reminder_item = {
-  #     'description': new_item,
-  #     'completed': False,
-  #   }
+  def add_item(self, list_id: int, description: str) -> int:
+    reminder_item = {
+      'list_id': list_id,
+      'description': description,
+      'completed': False,
+    }
 
-  #   reminder_list = self.get_list(list_id, owner)
-  #   reminder_list['reminders'].append(reminder_item)
-  #   self._reminder_lists_table.update(reminder_list, doc_ids=[list_id])
+    self._verify_list_exists(list_id)
+    item_id = self._items_table.insert(reminder_item)
+    return item_id
 
 
   # Selected
@@ -138,6 +143,6 @@ class ReminderStorage:
     selected_list = self._selected_table.search(Query().owner == self.owner)
 
     if selected_list and selected_list[0]['list_id'] == deleted_id:
-      reminder_lists = self._reminder_lists_table.all()
+      reminder_lists = self._lists_table.all()
       list_id = reminder_lists[0].doc_id if reminder_lists else None
       self.set_selected_list(list_id)
