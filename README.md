@@ -16,7 +16,7 @@ It uses:
 ## Installing dependencies
 
 You will need a recent version of Python to run this app.
-To install project dependencies, run:
+To install project dependencies:
 
 ```
 pip install -r requirements.txt
@@ -27,10 +27,9 @@ It is recommended to install dependencies into a [virtual environment](https://d
 
 ## Running the app
 
-To install dependencies and run the app:
+To run the app:
 
 ```
-pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
@@ -67,15 +66,25 @@ You may also strike out completed items.
 ![Bulldoggy reminders](static/img/readme/bulldoggy-reminders.png)
 
 
+## Reading the docs
+
+To read the API docs, open the following pages:
+
+* [`/docs`](http://127.0.0.1:8000/docs) for classic OpenAPI docs
+* [`/redoc`](http://127.0.0.1:8000/redoc) for more modern ReDoc docs
+
+
 ## Why did I build this app in Python?
 
-Personally, I love Python, and I wanted to demonstrate how to build a full-stack modern web app *entirely* with Python.
+Personally, I love Python, and I wanted to demonstrate how to **build a full-stack modern web app *entirely* with Python**.
+
 JavaScript essentially has a near-monopoly on front-end web development.
 Browsers require JavaScript code to perform dynamic web page interactions.
 However, [HTMX](https://htmx.org/) offers a novel way to sidestep this limitation:
 it provides special HTML attributes to denote dynamic interactions for elements.
 Under the hood, HTMX uses AJAX to issue HTTP requests and swap hypertext contents for elements targetted with its special attributes.
 JavaScript is still there – you just don't need to touch it!
+
 This enables web frameworks in languages like Python, Go, Java, and others to offer dynamic web page content
 directly in HTML *without* requiring developers to explicitly code any JavaScript.
 HTMX empowers you, as a developer, to build beautiful web apps while remaining in the tech stack of your choice!
