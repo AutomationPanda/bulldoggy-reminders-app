@@ -97,6 +97,7 @@ class ReminderStorage:
   def delete_list(self, list_id: int) -> None:
     self._verify_list_exists(list_id)
     self._lists_table.remove(doc_ids=[list_id])
+    self._items_table.remove(Query().list_id == list_id)
 
 
   def get_list(self, list_id: int) -> ReminderList:
