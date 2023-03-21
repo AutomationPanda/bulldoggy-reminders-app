@@ -151,6 +151,12 @@ class ReminderStorage:
     return models
   
 
+  def strike_item(self, item_id: int) -> None:
+    item = self._get_raw_item(item_id)
+    item['completed'] = not item['completed']
+    self._items_table.update(item, doc_ids=[item_id])
+  
+
   def update_item_description(self, item_id: int, new_description: str) -> None:
     item = self._get_raw_item(item_id)
     item['description'] = new_description

@@ -1,6 +1,7 @@
 <div
   class="reminder-row-with-input"
   data-id="reminder-item-row-{{ reminder_item.id }}"
+  hx-target="this"
 >
   <input
     type="text"
@@ -14,14 +15,12 @@
     src="/static/img/icons/icon-check-circle.svg"
     hx-patch="/reminders/item-row-description/{{ reminder_item.id }}"
     hx-include="[name='new_description']"
-    hx-target="[data-id='reminder-item-row-{{ reminder_item.id }}']"
     hx-trigger="click, keyup[key=='Enter'] from:[name='new_description']"
     hx-swap="outerHTML"
   />
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/item-row/{{ reminder_item.id }}"
-    hx-target="[data-id='reminder-item-row-{{ reminder_item.id }}']"
     hx-trigger="click, click from:.reminder-row"
     hx-swap="outerHTML"
   />

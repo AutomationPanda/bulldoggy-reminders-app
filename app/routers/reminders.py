@@ -191,6 +191,18 @@ async def patch_reminders_item_row_description(
   return templates.TemplateResponse("partials/reminders/item-row.html", context)
 
 
+@router.patch("/reminders/item-row-strike/{item_id}", response_class=HTMLResponse)
+async def patch_reminders_item_row_strike(
+  item_id: int,
+  request: Request,
+  storage: ReminderStorage = Depends(get_storage_for_page)
+):
+  storage.strike_item(item_id)
+  reminder_item = storage.get_item(item_id)
+  context = {'request': request, 'reminder_item': reminder_item}
+  return templates.TemplateResponse("partials/reminders/item-row.html", context)
+
+
 @router.get("/reminders/item-row-edit/{item_id}", response_class=HTMLResponse)
 async def get_reminders_item_row_edit(
   item_id: int,
