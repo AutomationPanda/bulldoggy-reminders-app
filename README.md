@@ -88,3 +88,11 @@ JavaScript is still there – you just don't need to touch it!
 This enables web frameworks in languages like Python, Go, Java, and others to offer dynamic web page content
 directly in HTML *without* requiring developers to explicitly code any JavaScript.
 HTMX empowers you, as a developer, to build beautiful web apps while remaining in the tech stack of your choice!
+
+
+## TODO list
+
+* Categorize APIs for docs
+* Fix API endpoints
+* Automate API tests
+* Automate UI tests
