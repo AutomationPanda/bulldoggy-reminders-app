@@ -7,7 +7,9 @@
     hx-target=".reminders-content"
     hx-trigger="click"
     hx-swap="outerHTML"
-  >{{ reminder_list.name }}</p>
+  >
+    {{ reminder_list.name }}
+  </p>
   <img
     src="/static/img/icons/icon-edit.svg"
     hx-get="/reminders/list-row-edit/{{ reminder_list.id }}"
