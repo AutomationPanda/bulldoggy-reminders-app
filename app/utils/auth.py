@@ -11,6 +11,7 @@ import secrets
 
 from app import users, secret_key
 from app.utils.exceptions import UnauthorizedException, UnauthorizedPageException
+from app.utils.storage import ReminderStorage
 
 from fastapi import Cookie, Depends, Form
 from fastapi.security import HTTPBasic
@@ -96,3 +97,7 @@ def get_username_for_page(cookie: Optional[AuthCookie] = Depends(get_auth_cookie
     raise UnauthorizedPageException()
   
   return cookie.username
+
+
+def get_storage_for_page(username: str = Depends(get_username_for_page)) -> ReminderStorage:
+  return ReminderStorage(owner=username)

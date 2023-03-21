@@ -6,7 +6,6 @@ This module provides routes for the API.
 # Imports
 # --------------------------------------------------------------------------------
 
-from app import storage
 from app.utils.auth import get_username_for_api
 
 from fastapi import APIRouter, Depends

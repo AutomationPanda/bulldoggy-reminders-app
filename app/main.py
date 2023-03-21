@@ -9,7 +9,7 @@ This module is the main module for the FastAPI app.
 from app import templates
 from app.utils.auth import AuthCookie, get_auth_cookie
 from app.utils.exceptions import UnauthorizedPageException
-from app.routers import api, login, reminders
+from app.routers import login, reminders
 
 from fastapi import Depends, FastAPI, Request
 from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
@@ -23,7 +23,7 @@ from typing import Optional
 # --------------------------------------------------------------------------------
 
 app = FastAPI()
-app.include_router(api.router)
+# app.include_router(api.router)
 app.include_router(login.router)
 app.include_router(reminders.router)
 
