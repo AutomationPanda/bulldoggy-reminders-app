@@ -137,11 +137,24 @@ class ReminderStorage:
     self._items_table.remove(doc_ids=[item_id])
 
 
+  def get_item(self, item_id: int) -> ReminderItem:
+    item = self._get_raw_item(item_id)
+    item['id'] = item_id
+    model = ReminderItem(**item)
+    return model
+
+
   def get_items(self, list_id: int) -> list[ReminderItem]:
     self._verify_list_exists(list_id)
     items = self._items_table.search(Query().list_id == list_id)
     models = [ReminderItem(id=item.doc_id, ** item) for item in items]
     return models
+  
+
+  def update_item_description(self, item_id: int, new_description: str) -> None:
+    item = self._get_raw_item(item_id)
+    item['description'] = new_description
+    self._items_table.update(item, doc_ids=[item_id])
 
 
   # Selected Lists

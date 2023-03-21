@@ -7,6 +7,10 @@
   </p>
   <img
     src="/static/img/icons/icon-edit.svg"
+    hx-get="/reminders/item-row-edit/{{ reminder_item.id }}"
+    hx-target="[data-id='reminder-item-row-{{ reminder_item.id }}']"
+    hx-trigger="click"
+    hx-swap="outerHTML"
   />
   <img
     src="/static/img/icons/icon-delete.svg"

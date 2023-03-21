@@ -157,6 +157,17 @@ async def post_reminders_select(
 # Routes for item row partials
 # --------------------------------------------------------------------------------
 
+@router.get("/reminders/item-row/{item_id}", response_class=HTMLResponse)
+async def get_reminders_item_row(
+  item_id: int,
+  request: Request,
+  storage: ReminderStorage = Depends(get_storage_for_page)
+):
+  reminder_item = storage.get_item(item_id)
+  context = {'request': request, 'reminder_item': reminder_item}
+  return templates.TemplateResponse("partials/reminders/item-row.html", context)
+
+
 @router.delete("/reminders/item-row/{item_id}", response_class=HTMLResponse)
 async def delete_reminders_item_row(
   item_id: int,
@@ -165,6 +176,28 @@ async def delete_reminders_item_row(
 ):
   storage.delete_item(item_id)
   return _get_reminders_grid(request, storage)
+
+
+@router.patch("/reminders/item-row-description/{item_id}", response_class=HTMLResponse)
+async def patch_reminders_item_row_description(
+  item_id: int,
+  request: Request,
+  storage: ReminderStorage = Depends(get_storage_for_page),
+  new_description: str = Form()
+):
+  storage.update_item_description(item_id, new_description)
+  return _get_reminders_grid(request, storage)
+
+
+@router.get("/reminders/item-row-edit/{item_id}", response_class=HTMLResponse)
+async def get_reminders_item_row_edit(
+  item_id: int,
+  request: Request,
+  storage: ReminderStorage = Depends(get_storage_for_page)
+):
+  reminder_item = storage.get_item(item_id)
+  context = {'request': request, 'reminder_item': reminder_item}
+  return templates.TemplateResponse("partials/reminders/item-row-edit.html", context)
 
 
 @router.get("/reminders/new-item-row", response_class=HTMLResponse)
