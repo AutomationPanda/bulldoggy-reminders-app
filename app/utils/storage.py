@@ -49,8 +49,8 @@ class ReminderStorage:
 
   # Private Methods
 
-  def _get_raw_list(self, reminders_id: int) -> Document:
-    reminder_list = self._reminder_lists_table.get(doc_id=reminders_id)
+  def _get_raw_list(self, list_id: int) -> Document:
+    reminder_list = self._reminder_lists_table.get(doc_id=list_id)
 
     if not reminder_list:
       raise NotFoundException()
@@ -68,14 +68,14 @@ class ReminderStorage:
     return list_id
   
 
-  def delete_list(self, reminders_id: int) -> None:
-    self.get_list(reminders_id)
-    self._reminder_lists_table.remove(doc_ids=[reminders_id])
+  def delete_list(self, list_id: int) -> None:
+    self.get_list(list_id)
+    self._reminder_lists_table.remove(doc_ids=[list_id])
 
 
-  def get_list(self, reminders_id: int) -> ReminderList:
-    reminder_list = self._get_raw_list(reminders_id)
-    reminder_list['id'] = reminders_id
+  def get_list(self, list_id: int) -> ReminderList:
+    reminder_list = self._get_raw_list(list_id)
+    reminder_list['id'] = list_id
     model = ReminderList(**reminder_list)
     return model
 
@@ -86,23 +86,23 @@ class ReminderStorage:
     return models
   
 
-  def update_list_name(self, reminders_id: int, new_name: str) -> None:
-    reminder_list = self._get_raw_list(reminders_id)
+  def update_list_name(self, list_id: int, new_name: str) -> None:
+    reminder_list = self._get_raw_list(list_id)
     reminder_list['name'] = new_name
-    self._reminder_lists_table.update(reminder_list, doc_ids=[reminders_id])
+    self._reminder_lists_table.update(reminder_list, doc_ids=[list_id])
   
 
   # Reminder Items
 
-  # def add_item(self, reminders_id: int, owner: str, new_item: str) -> None:
+  # def add_item(self, list_id: int, owner: str, new_item: str) -> None:
   #   reminder_item = {
   #     'description': new_item,
   #     'completed': False,
   #   }
 
-  #   reminder_list = self.get_list(reminders_id, owner)
+  #   reminder_list = self.get_list(list_id, owner)
   #   reminder_list['reminders'].append(reminder_item)
-  #   self._reminder_lists_table.update(reminder_list, doc_ids=[reminders_id])
+  #   self._reminder_lists_table.update(reminder_list, doc_ids=[list_id])
 
 
   # Selected
@@ -112,32 +112,32 @@ class ReminderStorage:
     if not selected_list:
       return None
     
-    reminders_id = selected_list[0]['reminders_id']
-    if reminders_id is None:
+    list_id = selected_list[0]['list_id']
+    if list_id is None:
       return None
 
     try:
-      reminders_list = self.get_list(reminders_id)
+      reminders_list = self.get_list(list_id)
     except:
-      self._selected_table.update({'reminders_id': None}, Query().owner == self.owner)
+      self._selected_table.update({'list_id': None}, Query().owner == self.owner)
       return None
 
     return reminders_list
 
 
-  def set_selected_list(self, reminders_id: Optional[int]) -> None:
+  def set_selected_list(self, list_id: Optional[int]) -> None:
     selected_list = self._selected_table.search(Query().owner == self.owner)
 
     if selected_list:
-      self._selected_table.update({'reminders_id': reminders_id}, Query().owner == self.owner)
+      self._selected_table.update({'list_id': list_id}, Query().owner == self.owner)
     else:
-      self._selected_table.insert({'owner': self.owner, 'reminders_id': reminders_id})
+      self._selected_table.insert({'owner': self.owner, 'list_id': list_id})
 
 
   def reset_selected_after_delete(self, deleted_id: int) -> None:
     selected_list = self._selected_table.search(Query().owner == self.owner)
 
-    if selected_list and selected_list[0]['reminders_id'] == deleted_id:
+    if selected_list and selected_list[0]['list_id'] == deleted_id:
       reminder_lists = self._reminder_lists_table.all()
-      reminders_id = reminder_lists[0].doc_id if reminder_lists else None
-      self.set_selected_list(reminders_id)
+      list_id = reminder_lists[0].doc_id if reminder_lists else None
+      self.set_selected_list(list_id)
