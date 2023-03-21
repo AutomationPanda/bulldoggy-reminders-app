@@ -1,5 +1,5 @@
 <div
-  class="reminder-row-with-input"
+  class="reminder-row-with-input{{ " completed" if reminder_item.completed }}"
   data-id="reminder-item-row-{{ reminder_item.id }}"
   hx-target="this"
 >

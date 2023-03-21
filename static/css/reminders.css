@@ -127,6 +127,10 @@ body {
   background: #FFDBAD;
 }
 
+.reminder-row-with-input.completed input {
+  text-decoration: line-through;
+}
+
 .light-gray-text {
   color: #808080;
 }
