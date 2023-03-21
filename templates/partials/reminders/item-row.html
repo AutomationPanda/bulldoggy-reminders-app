@@ -15,7 +15,7 @@
   <img
     src="/static/img/icons/icon-delete.svg"
     hx-delete="/reminders/item-row/{{ reminder_item.id }}"
-    hx-target=".reminders-content"
+    hx-target="[data-id='reminder-item-row-{{ reminder_item.id }}']"
     hx-trigger="click"
     hx-swap="outerHTML"
   />

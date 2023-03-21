@@ -14,7 +14,7 @@
     src="/static/img/icons/icon-check-circle.svg"
     hx-patch="/reminders/item-row-description/{{ reminder_item.id }}"
     hx-include="[name='new_description']"
-    hx-target=".reminders-content"
+    hx-target="[data-id='reminder-item-row-{{ reminder_item.id }}']"
     hx-trigger="click, keyup[key=='Enter'] from:[name='new_description']"
     hx-swap="outerHTML"
   />
