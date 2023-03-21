@@ -25,9 +25,8 @@ Then, open your browser to `http://127.0.0.1:8000` to load the app.
 ## Logging into the app
 
 The [`config.json`](config.json) file declares the users for the app.
-The "default" username is `pythonista` with the password `I<3testing`.
 You may use any configured user credentials, or change them to your liking.
-Use them to log into the app.
+The "default" username is `pythonista` with the password `I<3testing`.
 
 
 ## Setting the database path
