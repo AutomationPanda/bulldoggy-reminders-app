@@ -13,8 +13,6 @@ uvicorn app.main:app --reload
 
 ## TODO
 
-* Refactor storage to put reminder items into their own table
-
 * Implement reminder items
   * hovering over a row shows the icons
   * hovering away from a row removes the icons

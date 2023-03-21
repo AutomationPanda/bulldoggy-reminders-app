@@ -66,9 +66,24 @@ class ReminderStorage:
     
     return reminder_list
   
+
+  def _get_raw_item(self, item_id: int) -> Document:
+    item = self._items_table.get(doc_id=item_id)
+    if not item:
+      raise NotFoundException()
+    
+    self._verify_list_exists(item['list_id'])
+    return item
+
+
   def _verify_list_exists(self, list_id: int) -> None:
     # Just get the list and make sure no exceptions happen
     self._get_raw_list(list_id)
+  
+
+  def _verify_item_exists(self, item_id: int) -> None:
+    # Just get the item and make sure no exceptions happen
+    self._get_raw_item(item_id)
 
 
   # Reminder Lists
@@ -116,6 +131,11 @@ class ReminderStorage:
     item_id = self._items_table.insert(reminder_item)
     return item_id
   
+
+  def delete_item(self, item_id: int) -> None:
+    self._verify_item_exists(item_id)
+    self._items_table.remove(doc_ids=[item_id])
+
 
   def get_items(self, list_id: int) -> list[ReminderItem]:
     self._verify_list_exists(list_id)

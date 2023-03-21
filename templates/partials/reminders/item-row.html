@@ -1,7 +1,18 @@
 <div
   class="reminder-row"
+  data-id="reminder-item-row-{{ reminder_item.id }}"
 >
-  <p>{{ reminder_item.description }}</p>
-  <img src="/static/img/icons/icon-edit.svg" />
-  <img src="/static/img/icons/icon-delete.svg" />
+  <p>
+    {{ reminder_item.description }}
+  </p>
+  <img
+    src="/static/img/icons/icon-edit.svg"
+  />
+  <img
+    src="/static/img/icons/icon-delete.svg"
+    hx-delete="/reminders/item-row/{{ reminder_item.id }}"
+    hx-target=".reminders-content"
+    hx-trigger="click"
+    hx-swap="outerHTML"
+  />
 </div>

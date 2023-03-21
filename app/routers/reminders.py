@@ -157,6 +157,16 @@ async def post_reminders_select(
 # Routes for item row partials
 # --------------------------------------------------------------------------------
 
+@router.delete("/reminders/item-row/{item_id}", response_class=HTMLResponse)
+async def delete_reminders_item_row(
+  item_id: int,
+  request: Request,
+  storage: ReminderStorage = Depends(get_storage_for_page)
+):
+  storage.delete_item(item_id)
+  return _get_reminders_grid(request, storage)
+
+
 @router.get("/reminders/new-item-row", response_class=HTMLResponse)
 async def get_reminders_new_item_row(
   request: Request,
