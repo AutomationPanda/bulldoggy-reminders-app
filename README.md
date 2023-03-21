@@ -1,3 +1,5 @@
+![Bulldoggy Logo](static/img/logos/bulldoggy-100px.png)
+
 # Bulldoggy: The Reminders App
 
 *Bulldoggy* is a small demo web app for tracking reminders.
