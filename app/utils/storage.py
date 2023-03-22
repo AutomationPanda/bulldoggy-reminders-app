@@ -11,7 +11,7 @@ from app.utils.exceptions import NotFoundException, ForbiddenException
 from pydantic import BaseModel
 from tinydb import TinyDB, Query
 from tinydb.table import Document
-from typing import Optional
+from typing import List, Optional
 
 
 # --------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class SelectedList(BaseModel):
   id: int
   owner: str
   name: str
-  items: list[ReminderItem]
+  items: List[ReminderItem]
 
 
 # --------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ class ReminderStorage:
     return model
 
 
-  def get_lists(self) -> list[ReminderList]:
+  def get_lists(self) -> List[ReminderList]:
     reminder_lists = self._lists_table.search(Query().owner == self.owner)
     models = [ReminderList(id=rems.doc_id, **rems) for rems in reminder_lists]
     return models
@@ -145,7 +145,7 @@ class ReminderStorage:
     return model
 
 
-  def get_items(self, list_id: int) -> list[ReminderItem]:
+  def get_items(self, list_id: int) -> List[ReminderItem]:
     self._verify_list_exists(list_id)
     items = self._items_table.search(Query().list_id == list_id)
     models = [ReminderItem(id=item.doc_id, ** item) for item in items]
