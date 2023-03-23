@@ -26,7 +26,12 @@ router = APIRouter()
 # Routes
 # --------------------------------------------------------------------------------
 
-@router.get("/login", summary="Gets the login page", response_class=HTMLResponse)
+@router.get(
+  path="/login",
+  summary="Gets the login page",
+  tags=["Pages", "Authentication"],
+  response_class=HTMLResponse
+)
 async def get_login(
   request: Request,
   invalid: Optional[bool] = None,
@@ -37,7 +42,11 @@ async def get_login(
   return templates.TemplateResponse("pages/login.html", context)
 
 
-@router.post("/login", summary="Logs into the app")
+@router.post(
+  path="/login",
+  summary="Logs into the app",
+  tags=["Authentication"]
+)
 async def post_login(cookie: Optional[AuthCookie] = Depends(get_login_form_creds)) -> dict:
   if cookie:
     response = RedirectResponse('/reminders', status_code=302)
@@ -48,8 +57,13 @@ async def post_login(cookie: Optional[AuthCookie] = Depends(get_login_form_creds
   return response
 
 
-@router.get("/logout", summary="Logs out of the app")
-@router.post("/logout", summary="Logs out of the app")
+logout = dict(
+  path="/logout",
+  summary="Logs out of the app",
+  tags=["Authentication"]
+)
+@router.get(**logout)
+@router.post(**logout)
 async def post_login(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)) -> dict:
   if not cookie:
     raise UnauthorizedPageException()
