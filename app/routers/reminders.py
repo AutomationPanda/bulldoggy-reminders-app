@@ -18,7 +18,10 @@ from fastapi.responses import HTMLResponse
 # Router
 # --------------------------------------------------------------------------------
 
-router = APIRouter()
+router = APIRouter(
+  prefix="/reminders",
+  tags=["Reminders Content"]
+)
 
 
 # --------------------------------------------------------------------------------
@@ -45,7 +48,12 @@ def _get_reminders_grid(request: Request, storage: ReminderStorage):
 # Routes
 # --------------------------------------------------------------------------------
 
-@router.get("/reminders", summary="Logs into the app", response_class=HTMLResponse)
+@router.get(
+  path="",
+  summary="Gets the reminders page",
+  tags=["Pages"],
+  response_class=HTMLResponse
+)
 async def get_reminders(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
@@ -58,7 +66,12 @@ async def get_reminders(
 # Routes for list row partials
 # --------------------------------------------------------------------------------
 
-@router.get("/reminders/list-row/{list_id}", response_class=HTMLResponse)
+@router.get(
+  path="/list-row/{list_id}",
+  summary="Partial: Gets a reminder list row by ID",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_list_row(
   list_id: int,
   request: Request,
@@ -70,7 +83,12 @@ async def get_reminders_list_row(
   return templates.TemplateResponse("partials/reminders/list-row.html", context)
 
 
-@router.delete("/reminders/list-row/{list_id}", response_class=HTMLResponse)
+@router.delete(
+  path="/list-row/{list_id}",
+  summary="Partial: Deletes a reminder list row",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def delete_reminders_list_row(
   list_id: int,
   request: Request,
@@ -81,7 +99,12 @@ async def delete_reminders_list_row(
   return _get_reminders_grid(request, storage)
 
 
-@router.patch("/reminders/list-row-name/{list_id}", response_class=HTMLResponse)
+@router.patch(
+  path="/list-row-name/{list_id}",
+  summary="Partial: Updates a reminder list row's name",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def patch_reminders_list_row_name(
   list_id: int,
   request: Request,
@@ -93,7 +116,12 @@ async def patch_reminders_list_row_name(
   return _get_reminders_grid(request, storage)
 
 
-@router.get("/reminders/list-row-edit/{list_id}", response_class=HTMLResponse)
+@router.get(
+  path="/list-row-edit/{list_id}",
+  summary="Partial: Changes a reminder list row into editing mode",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_list_row_edit(
   list_id: int,
   request: Request,
@@ -105,7 +133,12 @@ async def get_reminders_list_row_edit(
   return templates.TemplateResponse("partials/reminders/list-row-edit.html", context)
 
 
-@router.get("/reminders/new-list-row", response_class=HTMLResponse)
+@router.get(
+  path="/new-list-row",
+  summary="Partial: Gets the row for adding a new reminder list",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_new_list_row(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
@@ -114,7 +147,12 @@ async def get_reminders_new_list_row(
   return templates.TemplateResponse("partials/reminders/new-list-row.html", context)
 
 
-@router.post("/reminders/new-list-row", response_class=HTMLResponse)
+@router.post(
+  path="/new-list-row",
+  summary="Partial: Creates a new reminder list",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def post_reminders_new_list_row(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page),
@@ -125,7 +163,12 @@ async def post_reminders_new_list_row(
   return _get_reminders_grid(request, storage)
 
 
-@router.get("/reminders/new-list-row-edit", response_class=HTMLResponse)
+@router.get(
+  path="/new-list-row-edit",
+  summary="Partial: Changes the new reminder list row into editing mode",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_new_list_row_edit(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
@@ -134,7 +177,12 @@ async def get_reminders_new_list_row_edit(
   return templates.TemplateResponse("partials/reminders/new-list-row-edit.html", context)
 
 
-@router.post("/reminders/select/{list_id}", response_class=HTMLResponse)
+@router.post(
+  path="/select/{list_id}",
+  summary="Partial: Selects a new reminder list row",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def post_reminders_select(
   list_id: int,
   request: Request,
@@ -148,7 +196,12 @@ async def post_reminders_select(
 # Routes for item row partials
 # --------------------------------------------------------------------------------
 
-@router.get("/reminders/item-row/{item_id}", response_class=HTMLResponse)
+@router.get(
+  path="/item-row/{item_id}",
+  summary="Partial: Gets a new reminder item row by ID",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_item_row(
   item_id: int,
   request: Request,
@@ -159,17 +212,26 @@ async def get_reminders_item_row(
   return templates.TemplateResponse("partials/reminders/item-row.html", context)
 
 
-@router.delete("/reminders/item-row/{item_id}", response_class=HTMLResponse)
+@router.delete(
+  path="/item-row/{item_id}",
+  summary="Partial: Deletes a new reminder item row",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def delete_reminders_item_row(
   item_id: int,
-  request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
 ):
   storage.delete_item(item_id)
   return ""
 
 
-@router.patch("/reminders/item-row-description/{item_id}", response_class=HTMLResponse)
+@router.patch(
+  path="/item-row-description/{item_id}",
+  summary="Partial: Updates a reminder item row's description",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def patch_reminders_item_row_description(
   item_id: int,
   request: Request,
@@ -182,7 +244,12 @@ async def patch_reminders_item_row_description(
   return templates.TemplateResponse("partials/reminders/item-row.html", context)
 
 
-@router.patch("/reminders/item-row-strike/{item_id}", response_class=HTMLResponse)
+@router.patch(
+  path="/item-row-strike/{item_id}",
+  summary="Partial: Toggles a reminder item's completed status",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def patch_reminders_item_row_strike(
   item_id: int,
   request: Request,
@@ -194,7 +261,12 @@ async def patch_reminders_item_row_strike(
   return templates.TemplateResponse("partials/reminders/item-row.html", context)
 
 
-@router.get("/reminders/item-row-edit/{item_id}", response_class=HTMLResponse)
+@router.get(
+  path="/item-row-edit/{item_id}",
+  summary="Partial: Changes a reminder item row into editing mode",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_item_row_edit(
   item_id: int,
   request: Request,
@@ -205,7 +277,12 @@ async def get_reminders_item_row_edit(
   return templates.TemplateResponse("partials/reminders/item-row-edit.html", context)
 
 
-@router.get("/reminders/new-item-row", response_class=HTMLResponse)
+@router.get(
+  path="/new-item-row",
+  summary="Partial: Gets the new reminder item row",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_new_item_row(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
@@ -214,7 +291,12 @@ async def get_reminders_new_item_row(
   return templates.TemplateResponse("partials/reminders/new-item-row.html", context)
 
 
-@router.post("/reminders/new-item-row", response_class=HTMLResponse)
+@router.post(
+  path="/new-item-row",
+  summary="Partial: Creates a new reminder item in the selected list",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def post_reminders_new_item_row(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page),
@@ -225,7 +307,12 @@ async def post_reminders_new_item_row(
   return _get_reminders_grid(request, storage)
 
 
-@router.get("/reminders/new-item-row-edit", response_class=HTMLResponse)
+@router.get(
+  path="/new-item-row-edit",
+  summary="Partial: Changes the new reminder item row into edit mode",
+  tags=["HTMX Partials"],
+  response_class=HTMLResponse
+)
 async def get_reminders_new_item_row_edit(
   request: Request,
   storage: ReminderStorage = Depends(get_storage_for_page)
