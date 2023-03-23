@@ -18,10 +18,7 @@ from fastapi.responses import HTMLResponse
 # Router
 # --------------------------------------------------------------------------------
 
-router = APIRouter(
-  prefix="/reminders",
-  tags=["Reminders Content"]
-)
+router = APIRouter(prefix="/reminders")
 
 
 # --------------------------------------------------------------------------------
