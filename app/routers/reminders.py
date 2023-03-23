@@ -54,15 +54,6 @@ async def get_reminders(
   return templates.TemplateResponse("pages/reminders.html", context)
 
 
-@router.get("/reminders-frozen", summary="Logs into the app", response_class=HTMLResponse)
-async def get_reminders(
-  request: Request,
-  storage: ReminderStorage = Depends(get_storage_for_page)
-):
-  context = {'request': request, 'owner': storage.owner}
-  return templates.TemplateResponse("pages/reminders-frozen.html", context)
-
-
 # --------------------------------------------------------------------------------
 # Routes for list row partials
 # --------------------------------------------------------------------------------
