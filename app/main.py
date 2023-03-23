@@ -56,17 +56,28 @@ async def page_not_found_exception_handler(request: Request, exc: HTTPException)
 # Routes
 # --------------------------------------------------------------------------------
 
-@app.get("/")
+@app.get(
+  path="/",
+  summary="Redirects to the login or reminders pages",
+  tags=["Pages"]
+)
 async def read_root(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)):
   path = '/reminders' if cookie else '/login'
   return RedirectResponse(path, status_code=302)
 
 
-@app.get('/favicon.ico', include_in_schema=False)
+@app.get(
+  path='/favicon.ico',
+  include_in_schema=False
+)
 async def get_favicon():
   return FileResponse("static/img/favicon.ico")
 
 
-@app.get('/not-found')
+@app.get(
+  path='/not-found',
+  summary="Gets the \"Not Found\" page",
+  tags=["Pages"]
+)
 async def get_not_found(request: Request):
   return templates.TemplateResponse("pages/not-found.html", {'request': request})
