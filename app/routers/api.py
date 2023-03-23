@@ -18,7 +18,10 @@ from typing import Dict, List, Optional
 # Router
 # --------------------------------------------------------------------------------
 
-router = APIRouter(prefix="/api")
+router = APIRouter(
+  prefix="/api",
+  tags=["API"]
+)
 
 
 # --------------------------------------------------------------------------------
