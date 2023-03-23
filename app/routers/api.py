@@ -6,10 +6,12 @@ This module provides routes for the API.
 # Imports
 # --------------------------------------------------------------------------------
 
-from app.utils.auth import get_username_for_api
+from app.utils.auth import get_storage_for_api
+from app.utils.storage import ReminderList, ReminderStorage
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
+from typing import List
 
 
 # --------------------------------------------------------------------------------
@@ -23,96 +25,82 @@ router = APIRouter(prefix="/api")
 # Models
 # --------------------------------------------------------------------------------
 
-class ReminderItem(BaseModel):
-  description: str
-  completed: bool
-
-
-class ReminderList(BaseModel):
-  id: int
-  owner: str
+class NewReminderListName(BaseModel):
   name: str
-  reminders: list[ReminderItem]
-
-
-class NewReminderList(BaseModel):
-  name: str
-  reminders: list[ReminderItem] | None
-
-
-class UpdatedReminderList(BaseModel):
-  name: str
-  reminders: list[ReminderItem]
 
 
 # --------------------------------------------------------------------------------
 # Routes
 # --------------------------------------------------------------------------------
 
-@router.get("/reminders", summary="Get the user's reminder lists", response_model=list[ReminderList])
+@router.get(
+  path="/reminders",
+  summary="Get the user's reminder lists",
+  response_model=List[ReminderList]
+)
 async def get_reminders(
-  username: str = Depends(get_username_for_api)
+  storage: ReminderStorage = Depends(get_storage_for_api)
 ) -> list[ReminderList]:
-  """
-  Gets the list of all reminder lists owned by the user.
-  """
+  """Gets the list of all reminder lists owned by the user."""
 
-  return storage.get_lists(username)
+  return storage.get_lists()
 
 
-@router.post("/reminders", summary="Create a new reminder list", response_model=ReminderList)
+@router.post(
+  path="/reminders",
+  summary="Create a new reminder list",
+  response_model=ReminderList
+)
 async def post_reminders(
-  reminder_list: NewReminderList,
-  username: str = Depends(get_username_for_api)
+  reminder_list: NewReminderListName,
+  storage: ReminderStorage = Depends(get_storage_for_api)
 ) -> ReminderList:
-  """
-  Creates a new reminder list for the user.
-  """
+  """Creates a new reminder list for the user."""
 
-  reminders_id = storage.create_list(
-    reminder_list.name,
-    username,
-    reminder_list.reminders)
-
-  return storage.get_list(reminders_id, username)
+  list_id = storage.create_list(reminder_list.name)
+  return storage.get_list(list_id)
 
 
-@router.get("/reminders/{reminders_id}", summary="Get a reminder list by ID", response_model=ReminderList)
-async def get_reminders_id(
-  reminders_id: int,
-  username: str = Depends(get_username_for_api)
+@router.get(
+  path="/reminders/{list_id}",
+  summary="Get a reminder list by ID",
+  response_model=ReminderList
+)
+async def get_list_id(
+  list_id: int,
+  storage: ReminderStorage = Depends(get_storage_for_api)
 ) -> ReminderList:
-  """
-  Gets the reminder list by ID.
-  """
+  """Gets a reminder list by ID."""
 
-  return storage.get_list(reminders_id, username)
+  return storage.get_list(list_id)
 
 
-@router.put("/reminders/{reminders_id}", summary="Fully updates a reminder list", response_model=ReminderList)
-async def put_reminders_id(
-  reminders_id: int,
-  reminder_list: UpdatedReminderList,
-  username: str = Depends(get_username_for_api)
+@router.patch(
+  path="/reminders/{list_id}",
+  summary="Updates a reminder list's name",
+  response_model=ReminderList
+)
+async def patch_list_id(
+  list_id: int,
+  reminder_list: NewReminderListName,
+  storage: ReminderStorage = Depends(get_storage_for_api)
 ) -> ReminderList:
-  """
-  Fully updates a reminder list for the user.
-  """
+  """Updates a reminder list's name."""
   
-  data = reminder_list.dict()
-  storage.update_list(reminders_id, data, username)
-
-  return storage.get_list(reminders_id, username)
+  storage.update_list_name(list_id, reminder_list.name)
+  return storage.get_list(list_id)
 
 
-@router.delete("/reminders/{reminders_id}", summary="Deletes a reminder list", response_model=dict)
-async def delete_reminders_id(
-  reminders_id: int,
-  username: str = Depends(get_username_for_api)
+@router.delete(
+  path="/reminders/{list_id}",
+  summary="Deletes a reminder list",
+  response_model=dict
+)
+async def delete_list_id(
+  list_id: int,
+  storage: ReminderStorage = Depends(get_storage_for_api)
 ) -> dict:
-  """
-  Deletes the reminder list by ID.
-  """
+  """Deletes the reminder list by ID."""
 
-  storage.delete_list(reminders_id, username)
+  storage.delete_list(list_id)
   return dict()
