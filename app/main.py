@@ -6,17 +6,14 @@ This module is the main module for the FastAPI app.
 # Imports
 # --------------------------------------------------------------------------------
 
-from app import templates
-from app.utils.auth import AuthCookie, get_auth_cookie
 from app.utils.exceptions import UnauthorizedPageException
-from app.routers import api, login, reminders
+from app.routers import api, login, reminders, root
 
-from fastapi import Depends, FastAPI, Request
+from fastapi import FastAPI, Request
 from fastapi.openapi.utils import get_openapi
-from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException
-from typing import Optional
 
 
 # --------------------------------------------------------------------------------
@@ -24,6 +21,7 @@ from typing import Optional
 # --------------------------------------------------------------------------------
 
 app = FastAPI()
+app.include_router(root.router)
 app.include_router(api.router)
 app.include_router(login.router)
 app.include_router(reminders.router)
@@ -101,34 +99,3 @@ def custom_openapi():
 
 
 app.openapi = custom_openapi
-
-
-# --------------------------------------------------------------------------------
-# Routes
-# --------------------------------------------------------------------------------
-
-@app.get(
-  path="/",
-  summary="Redirects to the login or reminders pages",
-  tags=["Pages"]
-)
-async def read_root(cookie: Optional[AuthCookie] = Depends(get_auth_cookie)):
-  path = '/reminders' if cookie else '/login'
-  return RedirectResponse(path, status_code=302)
-
-
-@app.get(
-  path='/favicon.ico',
-  include_in_schema=False
-)
-async def get_favicon():
-  return FileResponse("static/img/favicon.ico")
-
-
-@app.get(
-  path='/not-found',
-  summary="Gets the \"Not Found\" page",
-  tags=["Pages"]
-)
-async def get_not_found(request: Request):
-  return templates.TemplateResponse("pages/not-found.html", {'request': request})
