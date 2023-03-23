@@ -90,7 +90,23 @@ directly in HTML *without* requiring developers to explicitly code any JavaScrip
 HTMX empowers you, as a developer, to build beautiful web apps while remaining in the tech stack of your choice!
 
 
+## Credits
+
+* I used [DALL-E](https://labs.openai.com/) to generate the Bulldoggy logo
+* I used [ChatGPT](https://chat-gpt.org/chat) to generate parts of the HTML and CSS
+* [Michael Kennedy](https://twitter.com/mkennedy)'s talks at [PyBay 2021](https://www.youtube.com/watch?v=10G874qqtrc) and [Python Web Conference 2022](https://www.youtube.com/watch?v=10G874qqtrc_) on Python + HTMX inspired me
+* The [HTMX docs](https://htmx.org/docs/) and [examples](https://htmx.org/examples/) taught me how to use HTMX
+* A few friends from Twitter and LinkedIn helped me test the app:
+  * [Juan Rosello](https://www.linkedin.com/in/juanrosello/)
+  * [Sharib Islam](https://www.linkedin.com/in/sharibislamqa/)
+  * [therunninglight](https://twitter.com/therunninglight)
+  * [enigma5312](https://twitter.com/enigma5312)
+  * [MrpoSr](https://twitter.com/MrpoSr)
+
+
 ## TODO list
 
+* Add reset/restore API paths
 * Automate API tests
 * Automate UI tests
+* Automate unit tests
