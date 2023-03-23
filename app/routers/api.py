@@ -256,4 +256,3 @@ async def post_unselect(
 
   storage.set_selected_list(None)
   return {}
-
