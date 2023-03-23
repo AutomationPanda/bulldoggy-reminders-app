@@ -1,5 +1,5 @@
 {
-  "db_path": "reminder_db2.json",
+  "db_path": "reminder_db.json",
 
   "secret_key": "Pandas are awesome!",
   
