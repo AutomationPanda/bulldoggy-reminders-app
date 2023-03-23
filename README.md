@@ -93,6 +93,5 @@ HTMX empowers you, as a developer, to build beautiful web apps while remaining i
 ## TODO list
 
 * Categorize APIs for docs
-* Fix API endpoints
 * Automate API tests
 * Automate UI tests

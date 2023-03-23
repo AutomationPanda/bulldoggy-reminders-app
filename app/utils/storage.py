@@ -166,12 +166,17 @@ class ReminderStorage:
 
   # Selected Lists
 
-  def get_selected_list(self) -> Optional[SelectedList]:
+  def get_selected_list_id(self) -> Optional[int]:
     selected_list = self._selected_table.search(Query().owner == self.owner)
     if not selected_list:
       return None
     
     list_id = selected_list[0]['list_id']
+    return list_id
+
+
+  def get_selected_list(self) -> Optional[SelectedList]:
+    list_id = self.get_selected_list_id()
     if list_id is None:
       return None
 
