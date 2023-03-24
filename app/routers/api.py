@@ -1,5 +1,6 @@
 """
-This module provides routes for the API.
+This module provides routes for the API,
+which provides a "backdoor" for reminder data management.
 """
 
 # --------------------------------------------------------------------------------
