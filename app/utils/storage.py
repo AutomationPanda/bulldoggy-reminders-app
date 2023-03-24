@@ -100,6 +100,11 @@ class ReminderStorage:
     self._items_table.remove(Query().list_id == list_id)
 
 
+  def delete_lists(self) -> None:
+    for rem_list in self.get_lists():
+      self.delete_list(rem_list.id)
+
+
   def get_list(self, list_id: int) -> ReminderList:
     reminder_list = self._get_raw_list(list_id)
     reminder_list['id'] = list_id

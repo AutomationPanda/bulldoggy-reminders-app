@@ -256,3 +256,60 @@ async def post_unselect(
 
   storage.set_selected_list(None)
   return {}
+
+
+# --------------------------------------------------------------------------------
+# Routes for data management
+# --------------------------------------------------------------------------------
+
+@router.delete(
+  path="/reminders/delete-lists",
+  summary="Delete all the user's reminder lists",
+  response_model=Dict
+)
+async def delete_delete_lists(
+  storage: ReminderStorage = Depends(get_storage_for_api)
+) -> Dict:
+  """Deletes all the user's reminder lists."""
+
+  storage.delete_lists()
+  return {}
+
+
+@router.post(
+  path="/reminders/create-new-lists",
+  summary="Create an entirely new set of reminders after deleting old reminders",
+  response_model=Dict
+)
+async def post_create_new_lists(
+  storage: ReminderStorage = Depends(get_storage_for_api)
+) -> Dict:
+  """Creates an entirely new set of reminders after deleting old reminders."""
+
+  storage.delete_lists()
+
+  # Chores
+  chores_id = storage.create_list("Chores")
+  storage.set_selected_list(chores_id)
+  storage.add_item(chores_id, "Buy groceries")
+  storage.add_item(chores_id, "Mow the lawn")
+  storage.strike_item(storage.add_item(chores_id, "Walk the dog"))
+  storage.strike_item(storage.add_item(chores_id, "Wash the dishes"))
+  storage.add_item(chores_id, "Do laundry")
+
+  # Groceries
+  groceries_id = storage.create_list("Groceries")
+  storage.add_item(groceries_id, "Tomatoes")
+  storage.add_item(groceries_id, "Garlic")
+  storage.add_item(groceries_id, "Olive oil")
+  storage.add_item(groceries_id, "Spaghetti")
+  storage.add_item(groceries_id, "Parmesan cheese")
+  storage.add_item(groceries_id, "Garlic bread")
+
+  # Projects
+  projects_id = storage.create_list("Projects")
+  storage.strike_item(storage.add_item(projects_id, "Paint the fence"))
+  storage.add_item(projects_id, "Replace the toilet")
+  storage.add_item(projects_id, "Install new curtain rods")
+
+  return {}
