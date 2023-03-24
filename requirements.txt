@@ -1,6 +1,7 @@
 fastapi==0.88.0
 Jinja2==3.1.2
 PyJWT==2.6.0
+pytest-playwright==0.3.2
 python-multipart==0.0.6
 requests==2.28.1
 tinydb==4.7.0
