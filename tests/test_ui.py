@@ -26,21 +26,23 @@ from testlib.inputs import User
 
 def test_successful_login(page: Page, user: User):
 
-  # Arrange
+  # Given the login page is displayed
   page.goto('/login')
 
-  # Act
+  # When the user logs into the app with valid credentials
   page.locator('[name="username"]').fill(user.username)
   page.locator('[name="password"]').fill(user.password)
   page.get_by_text('Login').click()
 
-  # Assert
+  # Then the reminders page is displayed
   expect(page).to_have_title('Reminders | Bulldoggy reminders app')
   expect(page).to_have_url(re.compile(re.escape('/') + 'reminders'))
   expect(page.locator('id=bulldoggy-logo')).to_be_visible()
   expect(page.locator('id=bulldoggy-title')).to_have_text('Bulldoggy')
-  expect(page.locator('id=reminders-message')).to_have_text(f'Reminders for {user.username}')
   expect(page.get_by_role('button', name='Logout')).to_be_visible()
+
+  # And the reminders page title card displays "Reminders for" the user's username
+  expect(page.locator('id=reminders-message')).to_have_text(f'Reminders for {user.username}')
 
 
 # --------------------------------------------------------------------------------
