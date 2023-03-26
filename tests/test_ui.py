@@ -9,6 +9,7 @@ This module contains Web UI tests for the Bulldoggy app.
 import re
 
 from playwright.sync_api import Page, expect
+from testlib.inputs import User
 
 
 # --------------------------------------------------------------------------------
@@ -23,14 +24,14 @@ from playwright.sync_api import Page, expect
 #   log out
 # --------------------------------------------------------------------------------
 
-def test_successful_login(page: Page):
+def test_successful_login(page: Page, user: User):
 
   # Arrange
-  page.goto('http://127.0.0.1:8000/login')
+  page.goto('/login')
 
   # Act
-  page.locator('[name="username"]').fill('pythonista')
-  page.locator('[name="password"]').fill('I<3testing')
+  page.locator('[name="username"]').fill(user.username)
+  page.locator('[name="password"]').fill(user.password)
   page.get_by_text('Login').click()
 
   # Assert
@@ -38,7 +39,7 @@ def test_successful_login(page: Page):
   expect(page).to_have_url(re.compile(re.escape('/') + 'reminders'))
   expect(page.locator('id=bulldoggy-logo')).to_be_visible()
   expect(page.locator('id=bulldoggy-title')).to_have_text('Bulldoggy')
-  expect(page.locator('id=reminders-message')).to_have_text('Reminders for pythonista')
+  expect(page.locator('id=reminders-message')).to_have_text(f'Reminders for {user.username}')
   expect(page.get_by_role('button', name='Logout')).to_be_visible()
 
 

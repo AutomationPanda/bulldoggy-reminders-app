@@ -1,0 +1,14 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+
+  "users": [
+    {
+      "username": "pythonista",
+      "password": "I<3testing"
+    },
+    {
+      "username": "engineer",
+      "password": "Muh5devices"
+    }
+  ]
+}
