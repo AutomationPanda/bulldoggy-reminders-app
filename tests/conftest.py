@@ -4,6 +4,8 @@ This module provides fixtures for testing.
 WARNING:
 Why don't we just use command line arguments for base URL and passwords?
 Because it's annoying to type them out every time we want to run tests!
+
+TODO: storage state for UI and API
 """
 
 # --------------------------------------------------------------------------------
@@ -13,6 +15,7 @@ Because it's annoying to type them out every time we want to run tests!
 import json
 import pytest
 
+from playwright.sync_api import Playwright
 from testlib.inputs import User
 
 
@@ -33,7 +36,7 @@ def _build_user(inputs, index):
 
 
 # --------------------------------------------------------------------------------
-# Config Fixture
+# Input Fixtures
 # --------------------------------------------------------------------------------
 
 @pytest.fixture(scope='session')
@@ -57,3 +60,12 @@ def user(test_inputs):
 @pytest.fixture(scope='session')
 def alt_user(test_inputs):
   return _build_user(test_inputs, 1)
+
+
+# --------------------------------------------------------------------------------
+# Playwright Fixtures
+# --------------------------------------------------------------------------------
+
+@pytest.fixture
+def bulldoggy_api(playwright: Playwright, base_url: str):
+  return playwright.request.new_context(base_url=base_url)
