@@ -23,14 +23,14 @@ jobs:
       - name: Install dependencies
         run: pip3 install -r requirements.txt
       
-      - name: Install Playwright browsers
-        run: playwright install --with-deps
+      - name: Install Playwright Chromium browsers
+        run: playwright install --with-deps chromium
 
       - name: Start the Bulldoggy app
         run: uvicorn app.main:app &
 
-      - name: Wait 15s for Bulldoggy app to be ready
-        run: sleep 15s
+      - name: Wait 10s for Bulldoggy app to be ready
+        run: sleep 10s
 
       - name: Execute tests
-        run: python3 -m pytest -s -v tests
+        run: python3 -m pytest -s -v --browser chromium tests
