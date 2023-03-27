@@ -1,0 +1,36 @@
+name: Run all tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+      
+      - name: Install Playwright browsers
+        run: playwright install --with-deps
+
+      - name: Start the Bulldoggy app
+        run: uvicorn app.main:app &
+
+      - name: Wait 15s for Bulldoggy app to be ready
+        run: sleep 15s
+
+      - name: Execute tests
+        run: python3 -m pytest -s -v tests
