@@ -2,6 +2,7 @@
   class="reminder-row-with-input{{ " completed" if reminder_item.completed }}"
   data-id="reminder-item-row-{{ reminder_item.id }}"
   hx-target="this"
+  hx-swap="outerHTML"
 >
   <input
     type="text"
@@ -16,12 +17,10 @@
     hx-patch="/reminders/item-row-description/{{ reminder_item.id }}"
     hx-include="[name='new_description']"
     hx-trigger="click, keyup[key=='Enter'] from:[name='new_description']"
-    hx-swap="outerHTML"
   />
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/item-row/{{ reminder_item.id }}"
     hx-trigger="click, click from:.reminder-row"
-    hx-swap="outerHTML"
   />
 </div>
