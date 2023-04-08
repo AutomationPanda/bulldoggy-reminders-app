@@ -21,6 +21,6 @@
   <img
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/item-row/{{ reminder_item.id }}"
-    hx-trigger="click, click from:.reminder-row"
+    hx-trigger="click, click from:.reminder-row, keyup[key=='Escape'] from:[name='new_description']"
   />
 </div>

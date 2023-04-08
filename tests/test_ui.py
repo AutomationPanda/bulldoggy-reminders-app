@@ -70,6 +70,7 @@ def test_successful_login(page: Page, user: User):
 #   edit the name of a completed item
 #   begin editing the name of a list but cancel by clicking X
 #   begin editing the name of a list but cancel by clicking away
+#   begin editing the name of a list but cancel by typing ESCAPE
 #   delete an item
 #   delete all items
 #   creat new items after deleting all items in a list
@@ -80,6 +81,7 @@ def test_successful_login(page: Page, user: User):
 #   commit an edit by typing ENTER
 #   begin editing the name of a list but cancel by clicking X
 #   begin editing the name of a list but cancel by clicking away
+#   begin editing the name of a list but cancel by typing ESCAPE
 #   delete an unselected list
 #   delete a selected list
 #   delete all lists

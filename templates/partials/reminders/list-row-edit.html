@@ -22,7 +22,7 @@
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/list-row/{{ reminder_list.id }}"
     hx-target="[data-id='reminder-row-{{ reminder_list.id }}']"
-    hx-trigger="click, click from:.reminder-row"
+    hx-trigger="click, click from:.reminder-row, keyup[key=='Escape'] from:[name='new_name']"
     hx-swap="outerHTML"
   />
 </div>

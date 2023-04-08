@@ -20,7 +20,7 @@
     src="/static/img/icons/icon-x-circle.svg"
     hx-get="/reminders/new-list-row"
     hx-target="[data-id='new-reminder-row']"
-    hx-trigger="click, click from:.reminder-row"
+    hx-trigger="click, click from:.reminder-row, keyup[key=='Escape'] from:[name='reminder_list_name']"
     hx-swap="outerHTML"
   />
 </div>
