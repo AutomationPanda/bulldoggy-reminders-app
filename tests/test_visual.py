@@ -2,7 +2,7 @@ import os
 import pytest
 
 from applitools.playwright import *
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from testlib.inputs import User
 
 
@@ -20,7 +20,7 @@ def runner():
 
 @pytest.fixture(scope='session')
 def batch_info():
-  return BatchInfo("Example: Playwright Python with the Ultrafast Grid")
+  return BatchInfo("Bulldoggy: The Reminders App")
 
 
 @pytest.fixture(scope='session')
