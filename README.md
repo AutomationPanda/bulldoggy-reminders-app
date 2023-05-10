@@ -12,6 +12,8 @@ It uses:
 * [TinyDB](https://tinydb.readthedocs.io/en/latest/index.html) for the database
 * [Playwright](https://playwright.dev/python/) and [pytest](https://docs.pytest.org/) for testing
 
+I first shared Bulldoggy in my PyTexas 2023 keynote, [*Full-Stack Python*](https://www.youtube.com/watch?v=ka5KRLUn47s).
+
 
 ## Installing dependencies
 
@@ -88,6 +90,9 @@ JavaScript is still there – you just don't need to touch it!
 This enables web frameworks in languages like Python, Go, Java, and others to offer dynamic web page content
 directly in HTML *without* requiring developers to explicitly code any JavaScript.
 HTMX empowers you, as a developer, to build beautiful web apps while remaining in the tech stack of your choice!
+
+To learn more about this app's design, please watch my [PyTexas](https://www.pytexas.org/) 2023 keynote,
+[*Full-Stack Python*](https://www.youtube.com/watch?v=ka5KRLUn47s).
 
 
 ## Credits
