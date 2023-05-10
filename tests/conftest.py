@@ -69,3 +69,15 @@ def alt_user(test_inputs):
 @pytest.fixture
 def bulldoggy_api(playwright: Playwright, base_url: str):
   return playwright.request.new_context(base_url=base_url)
+
+
+# --------------------------------------------------------------------------------
+# Hooks
+# --------------------------------------------------------------------------------
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+
+  # Expose the test result to the request
+  outcome = yield
+  setattr(item, 'test_result', outcome.get_result())
