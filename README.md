@@ -15,7 +15,7 @@ It uses:
 
 ## Installing dependencies
 
-You will need a recent version of Python to run this app.
+You will need Python 3.10+ to run this app.
 To install project dependencies:
 
 ```
