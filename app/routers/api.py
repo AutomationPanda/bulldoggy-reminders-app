@@ -52,7 +52,7 @@ class SelectedListId(BaseModel):
 )
 async def get_reminders(
   storage: ReminderStorage = Depends(get_storage_for_api)
-) -> list[ReminderList]:
+) -> List[ReminderList]:
   """Gets the list of all reminder lists owned by the user."""
 
   return storage.get_lists()
