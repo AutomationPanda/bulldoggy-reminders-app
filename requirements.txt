@@ -1,4 +1,4 @@
-eyes-selenium==5.18.0
+eyes-selenium==5.18.1
 fastapi==0.88.0
 Jinja2==3.1.2
 PyJWT==2.6.0

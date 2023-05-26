@@ -1,20 +1,13 @@
-import os
 import pytest
 
 from applitools.selenium import *
 from selenium.webdriver import Chrome, ChromeOptions, Remote
 from selenium.webdriver.common.by import By
-from testlib.inputs import User
 
 
 # --------------------------------------------------------------------------------
 # Fixtures
 # --------------------------------------------------------------------------------
-
-@pytest.fixture(scope='session')
-def api_key():
-  return os.getenv('APPLITOOLS_API_KEY')
-
 
 @pytest.fixture(scope='session')
 def runner():
@@ -29,10 +22,9 @@ def batch_info():
 
 
 @pytest.fixture(scope='session')
-def configuration(api_key: str, batch_info: BatchInfo):
+def configuration(batch_info: BatchInfo):
   config = Configuration()
   config.set_batch(batch_info)
-  config.set_api_key(api_key)
 
   config.add_browser(800, 600, BrowserType.CHROME)
   config.add_browser(1600, 1200, BrowserType.FIREFOX)
@@ -44,7 +36,15 @@ def configuration(api_key: str, batch_info: BatchInfo):
 
 
 @pytest.fixture(scope='function')
-def webdriver():
+def local_webdriver():
+  options = ChromeOptions()
+  driver = Chrome(options=options)
+  yield driver
+  driver.quit()
+
+
+@pytest.fixture(scope='function')
+def remote_webdriver():
   options = ChromeOptions()
   options.set_capability('applitools:tunnel', 'true')
 
@@ -60,14 +60,14 @@ def webdriver():
 def eyes(
   runner: VisualGridRunner,
   configuration: Configuration,
-  webdriver: Remote,
+  remote_webdriver: Remote,
   request: pytest.FixtureRequest):
 
   eyes = Eyes(runner)
   eyes.set_configuration(configuration)
 
   eyes.open(
-    driver=webdriver,
+    driver=remote_webdriver,
     app_name='Bulldoggy: The Reminders App',
     test_name=request.node.name,
     viewport_size=RectangleSize(1024, 768))
@@ -79,10 +79,16 @@ def eyes(
 @pytest.fixture(scope='function')
 def non_eyes_driver(
   batch_info: BatchInfo,
-  webdriver: Remote,
   request: pytest.FixtureRequest):
 
-  webdriver.execute_script(
+  options = ChromeOptions()
+  options.set_capability('applitools:tunnel', 'true')
+
+  driver = Remote(
+    command_executor=Eyes.get_execution_cloud_url(),
+    options=options)
+
+  driver.execute_script(
     "applitools:startTest",
     {
       "testName": request.node.name,
@@ -91,34 +97,35 @@ def non_eyes_driver(
     }
   )
   
-  yield webdriver
+  yield driver
 
   status = 'Failed' if request.node.test_result.failed else 'Passed'
-  webdriver.execute_script("applitools:endTest", {"status": status})
+  driver.execute_script("applitools:endTest", {"status": status})
+  driver.quit()
 
 
 # --------------------------------------------------------------------------------
 # Tests
 # --------------------------------------------------------------------------------
 
-def test_login_visually(webdriver: Remote, eyes: Eyes):
+def test_login_locally(local_webdriver: Chrome):
 
   # Load the login page
-  webdriver.get("http://127.0.0.1:8000/login")
-
-  # Check the login page
-  eyes.check(Target.window().fully().with_name("Login page"))
+  local_webdriver.get("http://127.0.0.1:8000/login")
 
   # Perform login
-  webdriver.find_element(By.NAME, "username").send_keys('pythonista')
-  webdriver.find_element(By.NAME, "password").send_keys("I<3testing")
-  webdriver.find_element(By.XPATH, "//button[.='Login']").click()
+  local_webdriver.find_element(By.NAME, "username").send_keys('pythonista')
+  local_webdriver.find_element(By.NAME, "password").send_keys("I<3testing")
+  local_webdriver.find_element(By.XPATH, "//button[.='Login']").click()
 
   # Check the reminders page
-  eyes.check(Target.window().fully().with_name("Reminders page"))
+  assert local_webdriver.find_element(By.ID, 'bulldoggy-logo')
+  assert local_webdriver.find_element(By.ID, 'bulldoggy-title').text == 'Bulldoggy'
+  assert local_webdriver.find_element(By.XPATH, "//button[.='Logout']")
+  assert local_webdriver.title == 'Reminders | Bulldoggy reminders app'
 
 
-def test_login_functionally(non_eyes_driver: Remote):
+def test_login_with_execution_cloud(non_eyes_driver: Remote):
 
   # Load the login page
   non_eyes_driver.get("http://127.0.0.1:8000/login")
@@ -132,4 +139,22 @@ def test_login_functionally(non_eyes_driver: Remote):
   assert non_eyes_driver.find_element(By.ID, 'bulldoggy-logo')
   assert non_eyes_driver.find_element(By.ID, 'bulldoggy-title').text == 'Bulldoggy'
   assert non_eyes_driver.find_element(By.XPATH, "//button[.='Logout']")
+  assert non_eyes_driver.title == 'Reminders | Bulldoggy reminders app'
+
+
+def test_login_with_eyes(remote_webdriver: Remote, eyes: Eyes):
+
+  # Load the login page
+  remote_webdriver.get("http://127.0.0.1:8000/login")
+
+  # Check the login page
+  eyes.check(Target.window().fully().with_name("Login page"))
+
+  # Perform login
+  remote_webdriver.find_element(By.NAME, "username").send_keys('pythonista')
+  remote_webdriver.find_element(By.NAME, "password").send_keys("I<3testing")
+  remote_webdriver.find_element(By.XPATH, "//button[.='Login']").click()
+
+  # Check the reminders page
+  eyes.check(Target.window().fully().with_name("Reminders page"))
   assert non_eyes_driver.title == 'Reminders | Bulldoggy reminders app'
