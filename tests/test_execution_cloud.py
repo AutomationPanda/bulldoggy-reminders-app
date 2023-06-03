@@ -157,4 +157,4 @@ def test_login_with_eyes(remote_webdriver: Remote, eyes: Eyes):
 
   # Check the reminders page
   eyes.check(Target.window().fully().with_name("Reminders page"))
-  assert non_eyes_driver.title == 'Reminders | Bulldoggy reminders app'
+  assert remote_webdriver.title == 'Reminders | Bulldoggy reminders app'
