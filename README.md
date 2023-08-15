@@ -38,6 +38,35 @@ uvicorn app.main:app --reload
 Then, open your browser to [`http://127.0.0.1:8000`](http://127.0.0.1:8000) to load the app.
 
 
+
+## Running the app with Docker
+
+Build the image with:
+
+```
+docker build -t bulldoggy-reminders-app:0.1 .
+```
+
+
+To run the image:
+
+```
+docker run -it --rm --name bulldoggy-reminders-app -p 8000:8000 bulldoggy-reminders-app:0.1
+```
+
+Alternatively, you can pull the image from [Docker Hub](https://hub.docker.com/repository/docker/vmaksimenko/bulldoggy-reminders-app) instead of building it locally:
+
+```
+docker pull vmaksimenko/bulldoggy-reminders-app
+```
+
+Then, run the image:
+
+```
+docker run -it --rm --name bulldoggy-reminders-app -p 8000:8000 vmaksimenko/bulldoggy-reminders-app
+```
+
+
 ## Logging into the app
 
 The [`config.json`](config.json) file declares the users for the app.
