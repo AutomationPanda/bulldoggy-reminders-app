@@ -12,7 +12,15 @@ It uses:
 * [TinyDB](https://tinydb.readthedocs.io/en/latest/index.html) for the database
 * [Playwright](https://playwright.dev/python/) and [pytest](https://docs.pytest.org/) for testing
 
-I first shared Bulldoggy in my PyTexas 2023 keynote, [*Full-Stack Python*](https://www.youtube.com/watch?v=ka5KRLUn47s).
+
+## Learning how it works
+
+Development and testing are two sides of the same coin:
+
+1. To learn how to *develop* the Bulldoggy app, watch my PyTexas 2023 keynote, [*Full-Stack Python*](https://www.youtube.com/watch?v=ka5KRLUn47s).
+2. To learn how to *test* the Bulldoggy app, watch my DjangoCon US 2023 keynote, [*Testing Modern Web Apps Like A Champion*](https://2023.djangocon.us/talks/keynote-testing-modern-web-apps-like-a-champion/).
+
+These two keynotes are bookends for each other.
 
 
 ## Installing dependencies
