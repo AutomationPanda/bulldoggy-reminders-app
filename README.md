@@ -55,23 +55,10 @@ Build the image with:
 docker build -t bulldoggy-reminders-app:0.1 .
 ```
 
-
 To run the image:
 
 ```
 docker run -it --rm --name bulldoggy-reminders-app -p 8000:8000 bulldoggy-reminders-app:0.1
-```
-
-Alternatively, you can pull the image from [Docker Hub](https://hub.docker.com/repository/docker/vmaksimenko/bulldoggy-reminders-app) instead of building it locally:
-
-```
-docker pull vmaksimenko/bulldoggy-reminders-app
-```
-
-Then, run the image:
-
-```
-docker run -it --rm --name bulldoggy-reminders-app -p 8000:8000 vmaksimenko/bulldoggy-reminders-app
 ```
 
 
